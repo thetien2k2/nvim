@@ -26,7 +26,7 @@ local servers = {
     filetypes = { "html", "templ" },
   },
   tailwindcss = {
-    filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    filetypes = { "css", "html", "templ", "astro", "javascript", "typescript", "react" },
     settings = {
       tailwindCSS = {
         includeLanguages = {
