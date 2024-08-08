@@ -1,15 +1,36 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
+    cmd = { "ConformInfo" },
+    -- opts = {},
+    opts = {
+      formatters_by_ft = {
+        go = { "goimports", "gofmt" },
+        angular = { "prettierd" },
+        css = { "prettierd" },
+        flow = { "prettierd" },
+        graphql = { "prettierd" },
+        html = { "prettierd" },
+        json = { "prettierd" },
+        jsx = { "prettierd" },
+        javascript = { "prettierd" },
+        less = { "prettierd" },
+        markdown = { "prettierd" },
+        scss = { "prettierd" },
+        typescript = { "prettierd" },
+        vue = { "prettierd" },
+        yaml = { "prettierd" },
+      },
+
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
   },
@@ -26,7 +47,6 @@ return {
         "htmx-lsp",
         "tailwindcss-language-server",
         "lua-language-server",
-        "prettier",
         "prettierd",
       },
     },
@@ -49,6 +69,6 @@ return {
       },
     },
   },
-  require'luasnip'.filetype_extend("templ", {"html"})
-}
 
+  require("luasnip").filetype_extend("templ", { "html" }),
+}
