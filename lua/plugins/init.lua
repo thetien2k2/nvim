@@ -1,25 +1,29 @@
 return {
   {
+    "williamboman/mason.nvim",
+    enabled = false,
+  },
+  {
     "stevearc/conform.nvim",
     cmd = { "ConformInfo" },
     -- opts = {},
     opts = {
       formatters_by_ft = {
-        go = { "goimports", "gofmt" },
-        angular = { "prettierd" },
-        css = { "prettierd" },
-        flow = { "prettierd" },
-        graphql = { "prettierd" },
-        html = { "prettierd" },
-        json = { "prettierd" },
-        jsx = { "prettierd" },
-        javascript = { "prettierd" },
-        less = { "prettierd" },
-        markdown = { "prettierd" },
-        scss = { "prettierd" },
-        typescript = { "prettierd" },
-        vue = { "prettierd" },
-        yaml = { "prettierd" },
+        go = { "gofmt" },
+        angular = { "prettier" },
+        css = { "prettier" },
+        flow = { "prettier" },
+        graphql = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        jsx = { "prettier" },
+        javascript = { "prettier" },
+        less = { "prettier" },
+        markdown = { "prettier" },
+        scss = { "prettier" },
+        typescript = { "prettier" },
+        vue = { "prettier" },
+        yaml = { "prettier" },
       },
 
       format_on_save = {
@@ -33,23 +37,6 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "gopls",
-        "goimports",
-        "templ",
-        "html-lsp",
-        "css-lsp",
-        "typescript-language-server",
-        "htmx-lsp",
-        "tailwindcss-language-server",
-        "lua-language-server",
-        "prettierd",
-      },
-    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
