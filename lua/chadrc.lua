@@ -5,8 +5,8 @@
 local M = {}
 
 M.ui = {
-  theme = "tokyonight",
-  theme_toggle = { "tokyonight", "tokyonight" },
+  theme = "catppuccin",
+  theme_toggle = { "catppuccin", "catppuccin" },
   statusline = {
     theme = "minimal",
     -- separator_style = "round",

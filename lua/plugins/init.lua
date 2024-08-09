@@ -3,6 +3,14 @@ return {
     "williamboman/mason.nvim",
     enabled = false,
   },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   enabled = false,
+  -- },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+  },
   {
     "stevearc/conform.nvim",
     cmd = { "ConformInfo" },
