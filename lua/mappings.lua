@@ -152,8 +152,8 @@ map("n", "<leader>q", function()
 end, { desc = "Conform format" })
 
 require("which-key").add {
-  { "<leader>f", group = "telescope" },
-  { "<leader>g", group = "git" },
+ { "<leader>f", group = "telescope" },
+ { "<leader>g", group = "git" },
 }
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "files" })
 map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>", { desc = "all files" })
