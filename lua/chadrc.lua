@@ -5,11 +5,9 @@
 local M = {}
 
 M.ui = {
-  theme = "catppuccin",
-  theme_toggle = { "catppuccin", "catppuccin" },
+  theme = "tokyonight",
   statusline = {
     theme = "minimal",
-    -- separator_style = "round",
   },
   -- hl_override = {
   -- 	Comment = { italic = true },
