@@ -1,6 +1,7 @@
   return {
     "stevearc/conform.nvim",
     cmd = { "ConformInfo" },
+    keys = "<leader>q",
     opts = {
       formatters_by_ft = {
         angular = { "prettier" },
