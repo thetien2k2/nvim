@@ -122,6 +122,7 @@ require("which-key").add {
 }
 
 --- nvchad 
+map("n", "<leader>nw", "<cmd>set wrap!<CR>", { desc = "toggle wrap" })
 map("n", "<leader>nn", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 map("n", "<leader>nc", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
@@ -162,7 +163,7 @@ map("n", "<leader>lS", "<cmd>FzfLua lsp_workspace_symbols<CR>", { desc = "worksp
 map("n", "<leader>ll", "<cmd>FzfLua lsp_live_workspace_symbols<CR>", { desc = "live query ws symbols" })
 map("n", "<leader>lI", "<cmd>FzfLua lsp_incoming_calls<CR>", { desc = "incoming calls" })
 map("n", "<leader>lO", "<cmd>FzfLua lsp_outgoing_calls<CR>", { desc = "outgoing calls" })
-map("n", "<leader>la", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "code actions" })
+map({"n", "v"}, "<leader>la", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "code actions" })
 map("n", "<leader>lf", "<cmd>FzfLua lsp_finder<CR>", { desc = "locations" })
 map("n", "<leader>lq", "<cmd>FzfLua diagnostics_document<CR>", { desc = "document diagnostics" })
 map("n", "<leader>lw", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "workspace diagnostics" })

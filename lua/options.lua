@@ -55,15 +55,16 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.fn.has "win32" ~= 0
-local sep = is_windows and "\\" or "/"
-local delim = is_windows and ";" or ":"
-vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
+-- local is_windows = vim.fn.has "win32" ~= 0
+-- local sep = is_windows and "\\" or "/"
+-- local delim = is_windows and ";" or ":"
+-- vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
-o.cursorlineopt = 'both' -- to enable cursorline!
+o.cursorlineopt = "both" -- to enable cursorline!
 o.relativenumber = true
-o.clipboard = 'unnamed'
+o.clipboard = "unnamed"
 o.linebreak = true
+-- o.breakindent = true
 
 -- using treesitter to set fold
 vim.wo.foldmethod = "expr"
