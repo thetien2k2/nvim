@@ -25,7 +25,8 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 -- map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
 -- map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
+map("n", "<leader>w", "<cmd>w<CR>", { desc = "save file" })
+map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "copy whole file" })
 
 -- global lsp mappings
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
@@ -50,11 +51,11 @@ map("n", "<leader>X", function()
 end, { desc = "buffer close all + tab" })
 
 map("n", "<leader>cr", function()
-  require("nvchad.tabufline").closeBufs_at_direction("right")
+  require("nvchad.tabufline").closeBufs_at_direction "right"
 end, { desc = "close buffers at right" })
 
 map("n", "<leader>cl", function()
-  require("nvchad.tabufline").closeBufs_at_direction("left")
+  require("nvchad.tabufline").closeBufs_at_direction "left"
 end, { desc = "close buffers at left" })
 
 map("n", "<leader>ml", function()
@@ -98,13 +99,6 @@ map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "terminal toggle floating term" })
 
--- whichkey
-map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
-
-map("n", "<leader>wk", function()
-  vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
-end, { desc = "whichkey query lookup" })
-
 -- vim.keymap.del("n", "<C-n>")
 
 map("n", "<leader>cd", "<cmd> cd %:p:h <cr>", { desc = "cwd to current file" })
@@ -115,13 +109,13 @@ map("n", "<leader>q", function()
 end, { desc = "conform format" })
 
 require("which-key").add {
- { "<leader>f", group = "fzf" },
- { "<leader>g", group = "git" },
- { "<leader>n", group = "nvchad" },
- { "<leader>l", group = "lsp" },
+  { "<leader>f", group = "fzf" },
+  { "<leader>g", group = "git" },
+  { "<leader>n", group = "nvchad" },
+  { "<leader>l", group = "lsp" },
 }
 
---- nvchad 
+--- nvchad
 map("n", "<leader>nw", "<cmd>set wrap!<CR>", { desc = "toggle wrap" })
 map("n", "<leader>nn", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
@@ -129,41 +123,27 @@ map("n", "<leader>nc", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" }
 map("n", "<leader>nt", "<cmd>Telescope terms<CR>", { desc = "hidden term" })
 map("n", "<leader>n=", "<cmd>Telescope themes<CR>", { desc = "themes" })
 map("n", "<leader>nb", "<cmd>NvimTreeToggle<CR>", { desc = "toggle nvtree" })
+map("n", "<leader>nK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
+map("n", "<leader>nk", function()
+  vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+end, { desc = "whichkey query lookup" })
 
--- fzf buffers and files
-map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "buffers" })
-map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "files" })
-map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "opened files history" })
-map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "live grep" })
-map("n", "<leader>fg", "<cmd>FzfLua grep_string<CR>", { desc = "grep string" })
-map("n", "<leader>fa", "<cmd>FzfLua find_files follow=true no_ignore=true hidden=true<CR>", { desc = "all files" })
--- telescope vim pickers
-map("n", "<leader>fc", "<cmd>FzfLua commands<CR>", { desc = "commands" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "buffers" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "files" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "opened files history" })
+map("n", "<leader>fq", "<cmd>FzfLua quickfix<CR>", { desc = "quickfix list" })
+map("n", "<leader>fQ", "<cmd>FzfLua quickfix_stack<CR>", { desc = "quickfix stack" })
+map("n", "<leader>fl", "<cmd>FzfLua loclist<CR>", { desc = "location list" })
+map("n", "<leader>fL", "<cmd>FzfLua loclist_stack<CR>", { desc = "location stack" })
+map("n", "<leader>fi", "<cmd>FzfLua lines<CR>", { desc = "open buffers lines" })
+map("n", "<leader>fI", "<cmd>FzfLua blines<CR>", { desc = "current buffers lines" })
+map("n", "<leader>ft", "<cmd>FzfLua tabs<CR>", { desc = "tabs" })
+map("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>", { desc = "live grep" })
+map("n", "<leader>f/", "<cmd>FzfLua grep<CR>", { desc = "grep" })
+map("n", "<leader>fw", "<cmd>FzfLua grep_cword<CR>", { desc = "cword" })
+map("n", "<leader>fW", "<cmd>FzfLua grep_cWORD<CR>", { desc = "cWORD" })
+
 map("n", "<leader>fs", "<cmd>FzfLua command_history<CR>", { desc = "command history" })
 map("n", "<leader>fd", "<cmd>FzfLua search_history<CR>", { desc = "search history" })
-map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "help page" })
 map("n", "<leader>fm", "<cmd>FzfLua marks<CR>", { desc = "marks" })
-map("n", "<leader>f/", "<cmd>FzfLua current_buffer_fuzzy_find<CR>", { desc = "in current buffer" })
--- git related
-map("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "telescope branches" })
-map("n", "<leader>gc", "<cmd>FzfLua git_commits<CR>", { desc = "telescope commits" })
-map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "telescope status" })
-map("n", "<leader>gt", "<cmd>FzfLua git_stash<CR>", { desc = "telescope stash" })
-map("n", "<leader>gf", "<cmd>FzfLua git_bcommits<CR>", { desc = "telescope buffer's commits" })
-map("v", "<leader>gr", "<cmd>FzfLua git_bcommits_range<CR>", { desc = "telescope buffer's range commits" })
-
--- lsp related
-map("n", "<leader>lr", "<cmd>FzfLua lsp_references<CR>", { desc = "references" })
-map("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>", { desc = "definitions" })
-map("n", "<leader>lD", "<cmd>FzfLua lsp_declarations<CR>", { desc = "declarations" })
-map("n", "<leader>lt", "<cmd>FzfLua lsp_typedefs<CR>", { desc = "type definitions" })
-map("n", "<leader>li", "<cmd>FzfLua lsp_implementations<CR>", { desc = "implementations" })
-map("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>", { desc = "document symbols" })
-map("n", "<leader>lS", "<cmd>FzfLua lsp_workspace_symbols<CR>", { desc = "workspace symbols" })
-map("n", "<leader>ll", "<cmd>FzfLua lsp_live_workspace_symbols<CR>", { desc = "live query ws symbols" })
-map("n", "<leader>lI", "<cmd>FzfLua lsp_incoming_calls<CR>", { desc = "incoming calls" })
-map("n", "<leader>lO", "<cmd>FzfLua lsp_outgoing_calls<CR>", { desc = "outgoing calls" })
-map({"n", "v"}, "<leader>la", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "code actions" })
-map("n", "<leader>lf", "<cmd>FzfLua lsp_finder<CR>", { desc = "locations" })
-map("n", "<leader>lq", "<cmd>FzfLua diagnostics_document<CR>", { desc = "document diagnostics" })
-map("n", "<leader>lw", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "workspace diagnostics" })
+map("n", "<leader>fB", "<cmd>FzfLua builtin<CR>", { desc = "builtin commands" })
