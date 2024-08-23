@@ -46,8 +46,6 @@ o.updatetime = 250
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
 
--- g.mapleader = " "
-
 -- disable some default providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
@@ -69,7 +67,7 @@ o.linebreak = true
 -- using treesitter to set fold
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.api.nvim_create_autocmd({ "BufRead" }, {
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   pattern = "*",
   callback = function()
     vim.api.nvim_feedkeys("zR", "n", false)

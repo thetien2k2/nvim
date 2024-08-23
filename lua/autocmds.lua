@@ -27,11 +27,11 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
 })
 --
 -- add gotmpl filetype
-autocmd({ "BufEnter", "BufNewFile" }, {
+autocmd({ "BufEnter", "BufNewFile", "BufFilePost" }, {
   pattern = "*.gotmpl",
   callback = function()
     vim.api.nvim_command "set filetype=gotmpl"
-    -- vim.treesitter.language.register("html", "gotmpl")
-    -- vim.treesitter.start()
+    vim.treesitter.language.register("html", "gotmpl")
+    vim.treesitter.start()
   end,
 })

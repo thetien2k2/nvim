@@ -7,10 +7,11 @@ M.on_attach = function(_, bufnr)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
 
-  map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
-  map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
-  map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
-  map("n", "gr", vim.lsp.buf.references, opts "Show references")
+  map("n", "gl", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+  map("n", "gD", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+  map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+  map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 
   map("n", "<leader>lh", vim.lsp.buf.signature_help, { desc = "signature help" })
   map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
@@ -19,8 +20,6 @@ M.on_attach = function(_, bufnr)
   map("n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, { desc = "list workspace folders" })
-
-  map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 
   map("n", "<leader>lR", function()
     require "nvchad.lsp.renamer"()
@@ -39,8 +38,11 @@ M.on_attach = function(_, bufnr)
   map("n", "<leader>lO", "<cmd>FzfLua lsp_outgoing_calls<CR>", { desc = "outgoing calls" })
   map({ "n", "v" }, "<leader>la", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "code actions" })
   map("n", "<leader>lf", "<cmd>FzfLua lsp_finder<CR>", { desc = "locations" })
-  map("n", "<leader>lq", "<cmd>FzfLua diagnostics_document<CR>", { desc = "document diagnostics" })
-  map("n", "<leader>lQ", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "workspace diagnostics" })
+
+  map("n", "<leader>lqd", "<cmd>FzfLua diagnostics_document<CR>", { desc = "document diagnostics" })
+  map("n", "<leader>lqw", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "workspace diagnostics" })
+  map("n", "<leader>lql", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
+  map("n", "<leader>lqq", vim.diagnostic.setqflist, { desc = "lsp diagnostic quickfix" })
 end
 
 -- disable semanticTokens

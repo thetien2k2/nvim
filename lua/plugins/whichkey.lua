@@ -9,7 +9,7 @@ return {
       function()
         require("which-key").show { global = false }
       end,
-      desc = "buffer local keymaps",
+      desc = "local keymaps",
     },
   },
   config = function(_, opts)
