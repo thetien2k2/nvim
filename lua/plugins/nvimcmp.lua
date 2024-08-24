@@ -11,11 +11,9 @@
           -- vscode format
           require("luasnip.loaders.from_vscode").lazy_load { exclude = vim.g.vscode_snippets_exclude or {} }
           require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
-
           -- snipmate format
           require("luasnip.loaders.from_snipmate").load()
           require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
-
           -- lua format
           require("luasnip.loaders.from_lua").load()
           require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
@@ -30,10 +28,10 @@
               end
             end,
           })
-          require("luasnip").filetype_extend("templ", { "html" })
+          -- require("luasnip").filetype_extend("templ", { "html" })
         end,
       },
-    
+
       -- autopairing of (){}[] etc
       {
         "windwp/nvim-autopairs",
@@ -43,8 +41,6 @@
         },
         config = function(_, opts)
           require("nvim-autopairs").setup(opts)
-
-          -- setup cmp for autopairs
           local cmp_autopairs = require "nvim-autopairs.completion.cmp"
           require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,

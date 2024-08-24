@@ -6,7 +6,7 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      go = { "gopls" },
+      go = { "goimports", "gopls" },
       angular = { "prettier" },
       css = { "prettier" },
       flow = { "prettier" },

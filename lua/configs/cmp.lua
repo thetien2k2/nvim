@@ -33,13 +33,13 @@ local formatting_style = {
 
 local function border(hl_name)
   return {
-    { "╭", hl_name },
+    { "┌", hl_name },
     { "─", hl_name },
-    { "╮", hl_name },
+    { "┐", hl_name },
     { "│", hl_name },
-    { "╯", hl_name },
+    { "┘", hl_name },
     { "─", hl_name },
-    { "╰", hl_name },
+    { "└", hl_name },
     { "│", hl_name },
   }
 end
@@ -48,7 +48,6 @@ local options = {
   completion = {
     completeopt = "menu,menuone",
   },
-
   window = {
     completion = {
       side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
@@ -102,8 +101,8 @@ local options = {
     end, { "i", "s" }),
   },
   sources = {
-    { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
