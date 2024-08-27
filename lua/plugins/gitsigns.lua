@@ -27,7 +27,6 @@ return {
         map("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", { desc = "buffer's commits" })
         map("n", "<leader>gB", "<cmd>Telescope git_branches<CR>", { desc = "branches" })
         map("n", "<leader>gS", "<cmd>Telescope git_stash<CR>", { desc = "stash" })
-        map("n", "<leader>gt", "<cmd>FzfLua git_tags<CR>", { desc = "tags" })
       end,
     }
 

@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 require("which-key").add {
   { "<leader>b", group = "buffer" },
-  { "<leader>f", group = "fzf" },
+  { "<leader>f", group = "telescope" },
   { "<leader>g", group = "git" },
   { "<leader>n", group = "nvchad" },
   { "<leader>l", group = "lsp" },
@@ -113,7 +113,6 @@ map("n", "<leader>a", function()
   require("conform").format()
 end, { desc = "conform format" })
 
---- nvchad
 map("n", "<leader>nw", "<cmd>set wrap!<CR>", { desc = "toggle wrap" })
 map("n", "<leader>nl", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
@@ -126,21 +125,29 @@ map("n", "<leader>nk", function()
   vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
 end, { desc = "whichkey query lookup" })
 
-map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "buffers" })
-map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "files" })
-map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "opened files history" })
-map("n", "<leader>fq", "<cmd>FzfLua quickfix<CR>", { desc = "quickfix list" })
-map("n", "<leader>fQ", "<cmd>FzfLua quickfix_stack<CR>", { desc = "quickfix stack" })
-map("n", "<leader>fl", "<cmd>FzfLua loclist<CR>", { desc = "location list" })
-map("n", "<leader>fL", "<cmd>FzfLua loclist_stack<CR>", { desc = "location stack" })
-map("n", "<leader>fi", "<cmd>FzfLua lines<CR>", { desc = "open buffers lines" })
-map("n", "<leader>fI", "<cmd>FzfLua blines<CR>", { desc = "current buffers lines" })
-map("n", "<leader>ft", "<cmd>FzfLua tabs<CR>", { desc = "tabs" })
-map("n", "<leader>f/", "<cmd>FzfLua live_grep<CR>", { desc = "live grep" })
-map("n", "<leader>fw", "<cmd>FzfLua grep_cword<CR>", { desc = "cword" })
-map("n", "<leader>fW", "<cmd>FzfLua grep_cWORD<CR>", { desc = "cWORD" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "files" })
+map({ "n", "v" }, "<leader>fw", "<cmd>Telescope grep_string<CR>", { desc = "word or selection" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "buffers" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "old files" })
+map("n", "<leader>fC", "<cmd>Telescope commands<CR>", { desc = "commands" })
+map("n", "<leader>fc", "<cmd>Telescope command_history<CR>", { desc = "command history" })
+map("n", "<leader>fs", "<cmd>Telescope search_history<CR>", { desc = "search history" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "help tags" })
+map("n", "<leader>f`", "<cmd>Telescope marks<CR>", { desc = "marks" })
+map("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { desc = "quickfix" })
+map("n", "<leader>fQ", "<cmd>Telescope quickfixhistory<CR>", { desc = "quickfix history" })
+map("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { desc = "location" })
+map("n", "<leader>fj", "<cmd>Telescope jumplist<CR>", { desc = "jump" })
+map("n", "<leader>fO", "<cmd>Telescope vim_options<CR>", { desc = "vim options" })
+map("n", "<leader>f\"", "<cmd>Telescope registers<CR>", { desc = "registers" })
+map("n", "<leader>fa", "<cmd>Telescope autocommands<CR>", { desc = "autocommands" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "fuzzy current buffer" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "keymaps" })
+map("n", "<leader>f.", "<cmd>Telescope resume<CR>", { desc = "keymaps" })
+map("n", "<leader>fp", "<cmd>Telescope pickers<CR>", { desc = "previous pickers" })
+map("n", "<leader>fB", "<cmd>Telescope builtin<CR>", { desc = "pickers" })
+map("n", "<leader>ft", "<cmd>Telescope treesitter<CR>", { desc = "treesitter nodes" })
 
-map("n", "<leader>fc", "<cmd>FzfLua command_history<CR>", { desc = "command history" })
-map("n", "<leader>fs", "<cmd>FzfLua search_history<CR>", { desc = "search history" })
-map("n", "<leader>fm", "<cmd>FzfLua marks<CR>", { desc = "marks" })
-map("n", "<leader>fB", "<cmd>FzfLua builtin<CR>", { desc = "fzf builtin" })
+map("n", "<leader>s", "<cmd>FzfLua live_grep<CR>", { desc = "live grep" })
+map("n", "<leader>/", "<cmd>FzfLua grep<CR>", { desc = "grep" })
+map("n", "<leader>z", "<cmd>FzfLua builtin<CR>", { desc = "fzf builtin" })
