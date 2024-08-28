@@ -3,8 +3,6 @@ return {
   enabled = true,
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   opts = function()
-    dofile(vim.g.base46_cache .. "nvimtree")
-
     local options = {
       filters = { dotfiles = true },
       disable_netrw = true,

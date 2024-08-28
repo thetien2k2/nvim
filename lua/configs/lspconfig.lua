@@ -74,8 +74,6 @@ M.capabilities.textDocument.completion.completionItem = {
 }
 
 M.defaults = function()
-  dofile(vim.g.base46_cache .. "lsp")
-  require("nvchad.lsp").diagnostic_config()
 end
 
 local servers = {
@@ -90,7 +88,6 @@ local servers = {
           library = {
             vim.fn.expand "$VIMRUNTIME/lua",
             vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
-            vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
             vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
             "${3rd}/luv/library",
           },

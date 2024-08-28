@@ -1,11 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
-  -- enabled = false,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   cmd = "Telescope",
   opts = function()
-    dofile(vim.g.base46_cache .. "telescope")
-
     local options = {
       defaults = {
         prompt_prefix = "   ",
@@ -27,9 +24,6 @@ return {
           num_pickers = 10,
         },
       },
-
-      extensions_list = { "themes", "terms" },
-      extensions = {},
     }
 
     return options
@@ -37,10 +31,5 @@ return {
   config = function(_, opts)
     local telescope = require "telescope"
     telescope.setup(opts)
-
-    -- load extensions
-    for _, ext in ipairs(opts.extensions_list) do
-      telescope.load_extension(ext)
-    end
   end,
 }
