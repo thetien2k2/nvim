@@ -1,7 +1,13 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  opts = {},
+  opts = {
+    spec = {
+      { "<leader>f", group = "telescope" },
+      { "<leader>l", group = "lsp" },
+      { "<leader>h", group = "git hunk", mode = { "n", "v" } },
+    },
+  },
   cmd = "WhichKey",
   keys = {
     {
@@ -12,7 +18,4 @@ return {
       desc = "local keymaps",
     },
   },
-  config = function(_, opts)
-    require("which-key").setup(opts)
-  end,
 }
