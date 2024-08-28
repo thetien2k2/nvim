@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   dependencies = {
     -- Allows extra capabilities provided by nvim-cmp
+    { 'j-hui/fidget.nvim', opts = {} },
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
@@ -31,7 +32,7 @@ return {
       end, { desc = "list workspace folders" })
 
       map("n", "<leader>lR", function()
-        require "nvchad.lsp.renamer"()
+        require "nvchad.lsp.renamer" ()
       end, { desc = "NvRenamer" })
 
       map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })

@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+local cscheme = "tokyonight"
+
 require "options"
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -14,11 +16,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local cscheme = "tokyonight"
 require("lazy").setup("plugins", {
   defaults = {
     lazy = true,
   },
-  install = { colorscheme = { "tokyonight" } },
+  install = {
+	  colorscheme =  {cscheme} ,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -54,5 +59,6 @@ require("lazy").setup("plugins", {
   },
 })
 
+vim.cmd({cmd='colorscheme', args={cscheme}})
 require "mappings"
 require "autocmds"

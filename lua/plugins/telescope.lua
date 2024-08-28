@@ -70,9 +70,10 @@ return {
     map("n", "<leader>fa", builtin.autocommands, { desc = "autocommands" })
     map("n", "<leader>fz", builtin.current_buffer_fuzzy_find, { desc = "fuzzy current buffer" })
     map("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
-    map("n", "<leader>f.", builtin.resume, { desc = "keymaps" })
+    map("n", "<leader>f.", builtin.resume, { desc = "resume" })
     map("n", "<leader>fp", builtin.pickers, { desc = "previous pickers" })
     map("n", "<leader>fb", builtin.builtin, { desc = "pickers" })
     map("n", "<leader>ft", builtin.treesitter, { desc = "treesitter nodes" })
+    map("n", "<leader>fe", builtin.colorscheme, { desc = "colorscheme" })
   end,
 }
