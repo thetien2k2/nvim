@@ -1,5 +1,7 @@
+---@diagnostic disable: undefined-global
 return {
   "nvim-telescope/telescope.nvim",
+  enabled=false,
   event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -52,28 +54,28 @@ return {
     -- See `:help telescope.builtin`
     local builtin = require "telescope.builtin"
     local map = vim.keymap.set
-    map("n", "<leader><leader>", builtin.buffers, { desc = "buffers" })
-    map({ "n", "v" }, "<leader>fw", builtin.grep_string, { desc = "word or selection" })
-    map("n", "<leader>ff", builtin.find_files, { desc = "files" })
-    map("n", "<leader>fo", builtin.oldfiles, { desc = "old files" })
-    map("n", "<leader>fC", builtin.commands, { desc = "commands" })
-    map("n", "<leader>fc", builtin.command_history, { desc = "command history" })
-    map("n", "<leader>fs", builtin.search_history, { desc = "search history" })
-    map("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
-    map("n", "<leader>f`", builtin.marks, { desc = "marks" })
-    map("n", "<leader>fq", builtin.quickfix, { desc = "quickfix" })
-    map("n", "<leader>fQ", builtin.quickfixhistory, { desc = "quickfix history" })
-    map("n", "<leader>fl", builtin.loclist, { desc = "location" })
-    map("n", "<leader>fj", builtin.jumplist, { desc = "jump" })
-    map("n", "<leader>fO", builtin.vim_options, { desc = "vim options" })
-    map("n", '<leader>f"', builtin.registers, { desc = "registers" })
-    map("n", "<leader>fa", builtin.autocommands, { desc = "autocommands" })
-    map("n", "<leader>fz", builtin.current_buffer_fuzzy_find, { desc = "fuzzy current buffer" })
-    map("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
-    map("n", "<leader>f.", builtin.resume, { desc = "resume" })
-    map("n", "<leader>fp", builtin.pickers, { desc = "previous pickers" })
-    map("n", "<leader>fb", builtin.builtin, { desc = "pickers" })
-    map("n", "<leader>ft", builtin.treesitter, { desc = "treesitter nodes" })
-    map("n", "<leader>fe", builtin.colorscheme, { desc = "colorscheme" })
+    map("n", "<leader><leader>", builtin.buffers, { desc = "select buffers" })
+    map({ "n", "v" }, "<leader>sw", builtin.grep_string, { desc = "word or selection" })
+    map("n", "<leader>sf", builtin.find_files, { desc = "files" })
+    map("n", "<leader>so", builtin.oldfiles, { desc = "old files" })
+    map("n", "<leader>sC", builtin.commands, { desc = "commands" })
+    map("n", "<leader>sc", builtin.command_history, { desc = "command history" })
+    map("n", "<leader>ss", builtin.search_history, { desc = "search history" })
+    map("n", "<leader>sh", builtin.help_tags, { desc = "help tags" })
+    map("n", "<leader>s`", builtin.marks, { desc = "marks" })
+    map("n", "<leader>sq", builtin.quickfix, { desc = "quickfix" })
+    map("n", "<leader>sQ", builtin.quickfixhistory, { desc = "quickfix history" })
+    map("n", "<leader>sl", builtin.loclist, { desc = "location" })
+    map("n", "<leader>sj", builtin.jumplist, { desc = "jump" })
+    map("n", "<leader>sO", builtin.vim_options, { desc = "vim options" })
+    map("n", '<leader>s"', builtin.registers, { desc = "registers" })
+    map("n", "<leader>sa", builtin.autocommands, { desc = "autocommands" })
+    map("n", "<leader>sz", builtin.current_buffer_fuzzy_find, { desc = "fuzzy current buffer" })
+    map("n", "<leader>sk", builtin.keymaps, { desc = "keymaps" })
+    map("n", "<leader>s.", builtin.resume, { desc = "resume" })
+    map("n", "<leader>sp", builtin.pickers, { desc = "previous pickers" })
+    map("n", "<leader>sb", builtin.builtin, { desc = "pickers" })
+    map("n", "<leader>st", builtin.treesitter, { desc = "treesitter nodes" })
+    map("n", "<leader>se", builtin.colorscheme, { desc = "colorscheme" })
   end,
 }

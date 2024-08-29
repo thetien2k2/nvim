@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 local cscheme = "tokyonight"
@@ -13,16 +14,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     error("Error cloning lazy.nvim:\n" .. out)
   end
-end ---@diagnostic disable-next-line: undefined-field
+end
 vim.opt.rtp:prepend(lazypath)
 
-local cscheme = "tokyonight"
 require("lazy").setup("plugins", {
   defaults = {
     lazy = true,
   },
   install = {
-	  colorscheme =  {cscheme} ,
+    colorscheme = { cscheme },
   },
   performance = {
     rtp = {
@@ -59,6 +59,7 @@ require("lazy").setup("plugins", {
   },
 })
 
-vim.cmd({cmd='colorscheme', args={cscheme}})
+vim.cmd { cmd = "colorscheme", args = { cscheme } }
+
 require "mappings"
 require "autocmds"
