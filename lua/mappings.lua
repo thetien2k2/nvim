@@ -34,3 +34,60 @@ map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
 map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
 map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
+-- local map = function(keys, func, desc, mode)
+--   mode = mode or "n"
+--   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+-- end
+--
+-- map("<leader>q", vim.diagnostic.setloclist, "diagnostic quickfix")
+-- map("<leader>a", vim.lsp.buf.code_action, "code action", { "n", "x" })
+-- --  To jump back, press <C-t>.
+-- map("<leader>cd", require("fzf-lua").lsp_definitions, "definition")
+-- map("<leader>cD", require("fzf-lua").lsp_declarations, "Declaration")
+-- map("<leader>cr", require("fzf-lua").lsp_references, "references")
+-- map("<leader>ci", require("fzf-lua").lsp_implementations, "implementation")
+-- map("<leader>ct", require("fzf-lua").lsp_typedefs, "type definition")
+-- map("<leader>ds", require("fzf-lua").lsp_document_symbols, "symbols")
+-- map("<leader>ws", require("fzf-lua").lsp_workspace_symbols, "symbols")
+-- map("<leader>wl", require("fzf-lua").lsp_workspace_symbols, "live symbols")
+--
+-- map("<leader>rn", vim.lsp.buf.rename, "rename")
+
+-- WARN: This is not Goto Definition, this is Goto Declaration.
+--  For example, in C this would take you to the header.
+-- map("cD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+-- map("n", "gl", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+-- map("n", "gD", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+-- map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+-- map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+-- map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
+--
+-- map("n", "<leader>lh", vim.lsp.buf.signature_help, { desc = "signature help" })
+-- map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
+-- map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
+--
+-- map("n", "<leader>lwl", function()
+--   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+-- end, { desc = "list workspace folders" })
+--
+-- map("n", "<leader>lR", function()
+--   require "nvchad.lsp.renamer"()
+-- end, { desc = "NvRenamer" })
+--
+-- map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
+-- map("n", "<leader>lql", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
+-- map("n", "<leader>lqq", vim.diagnostic.setqflist, { desc = "lsp diagnostic quickfix" })
+-- map("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "references" })
+-- map("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { desc = "definitions" })
+-- map("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "type definitions" })
+-- map("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { desc = "implementations" })
+-- map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "document symbols" })
+-- map("n", "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "workspace symbols" })
+-- map("n", "<leader>ll", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "query ws symbols" })
+-- map("n", "<leader>lI", "<cmd>Telescope lsp_incoming_calls<CR>", { desc = "incoming calls" })
+-- map("n", "<leader>lO", "<cmd>Telescope lsp_outgoing_calls<CR>", { desc = "outgoing calls" })
+-- map("n", "<leader>lf", "<cmd>Telescope lsp_finder<CR>", { desc = "locations" })
+--
+-- map("n", "<leader>lqd", "<cmd>Telescope diagnostics_document<CR>", { desc = "document diagnostics" })
+-- map("n", "<leader>lqw", "<cmd>Telescope diagnostics_workspace<CR>", { desc = "workspace diagnostics" })

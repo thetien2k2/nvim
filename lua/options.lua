@@ -25,6 +25,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
+
 -- vim.opt.laststatus = 3
 -- vim.opt.fillchars = { eob = " " }
 -- vim.opt.numberwidth = 2
@@ -40,7 +41,6 @@ vim.opt.softtabstop = 2
 -- vim.g.loaded_ruby_provider = 0
 -- vim.opt.linebreak = true
 
--- using treesitter to set fold
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.completeopt = "menuone,noselect,noinsert,popup"
