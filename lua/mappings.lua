@@ -33,3 +33,12 @@ end, { desc = "conform format" })
 map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
 map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
 map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
+
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+  if vim.snippet.active { direction = 1 } then
+    return "<cmd>lua vim.snippet.jump(1)<cr>"
+  else
+    return "<Tab>"
+  end
+end, { expr = true })
+map("i", "<C-Space>", "<cmd>lua vim.lsp.completion.trigger()<cr>", { silent = true, desc = "trigger lsp completion" })

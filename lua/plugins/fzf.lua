@@ -25,7 +25,7 @@ return {
     -- map("n", "<leader>so", fzf.oldfiles, { desc = "old files" })
     -- map("n", "<leader>sc", fzf.command_history, { desc = "command history" })
     -- map("n", "<leader>ss", fzf.search_history, { desc = "search history" })
-    -- map("n", "<leader>sh", fzf.help_tags, { desc = "help tags" })
+    map("n", "<leader>sh", fzf.help_tags, { desc = "help tags" })
     -- map("n", "<leader>s`", fzf.marks, { desc = "marks" })
     -- map("n", "<leader>sq", fzf.quickfix, { desc = "quickfix" })
     -- map("n", "<leader>sQ", fzf.quickfixhistory, { desc = "quickfix history" })

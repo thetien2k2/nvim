@@ -1,10 +1,7 @@
 ---@diagnostic disable: undefined-global
 return {
   "neovim/nvim-lspconfig",
-  event = "VeryLazy",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-  },
+  lazy = false,
   config = function()
     -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
     -- and elegantly composed help section, `:help lsp-vs-treesitter`
@@ -13,6 +10,7 @@ return {
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
+    --
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
@@ -112,6 +110,10 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, "[T]oggle Inlay [H]ints")
         end
+
+        if client then
+          vim.lsp.completion.enable(true, client.id, bufnr, {})
+        end
       end,
     })
 
@@ -120,24 +122,25 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    capabilities.textDocument.completion.completionItem = {
-      documentationFormat = { "markdown", "plaintext" },
-      snippetSupport = true,
-      preselectSupport = true,
-      insertReplaceSupport = true,
-      labelDetailsSupport = true,
-      deprecatedSupport = true,
-      commitCharactersSupport = true,
-      tagSupport = { valueSet = { 1 } },
-      resolveSupport = {
-        properties = {
-          "documentation",
-          "detail",
-          "additionalTextEdits",
-        },
-      },
-    }
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    -- capabilities.textDocument.completion.completionItem = {
+    --   documentationFormat = { "markdown", "plaintext" },
+    --   snippetSupport = true,
+    --   preselectSupport = true,
+    --   insertReplaceSupport = true,
+    --   labelDetailsSupport = true,
+    --   deprecatedSupport = true,
+    --   commitCharactersSupport = true,
+    --   tagSupport = { valueSet = { 1 } },
+    --   resolveSupport = {
+    --     properties = {
+    --       "documentation",
+    --       "detail",
+    --       "additionalTextEdits",
+    --     },
+    --   },
+    -- }
 
     local servers = {
       lua_ls = {
@@ -185,21 +188,6 @@ return {
           },
         },
       },
-      -- templ = {},
-      -- htmx = {
-      --   filetypes = { "html", "templ" },
-      -- },
-      -- tailwindcss = {
-      --   -- filetypes = { "css", "html", "templ", "astro", "javascript", "typescript", "react" },
-      --   settings = {
-      --     tailwindCSS = {
-      --       semanticTokens = true,
-      --       includeLanguages = {
-      --         templ = "html",
-      --       },
-      --     },
-      --   },
-      -- },
     }
 
     for name, opts in pairs(servers) do

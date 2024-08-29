@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = {
-    lazy = true,
+    lazy = false,
   },
   install = {
     colorscheme = { cscheme },
