@@ -15,8 +15,8 @@ vim.opt.timeoutlen = 300
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.inccommand = 'split'
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.scrolloff = 10
@@ -43,3 +43,4 @@ vim.opt.softtabstop = 2
 -- using treesitter to set fold
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.completeopt = "menuone,noselect,noinsert,popup"
