@@ -110,10 +110,6 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, "[T]oggle Inlay [H]ints")
         end
-
-        if client then
-          vim.lsp.completion.enable(true, client.id, bufnr, {})
-        end
       end,
     })
 
@@ -122,7 +118,6 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
     -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     -- capabilities.textDocument.completion.completionItem = {
     --   documentationFormat = { "markdown", "plaintext" },

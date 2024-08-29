@@ -1,7 +1,8 @@
 ---@diagnostic disable: undefined-global
 return {
   "hrsh7th/nvim-cmp",
-  event = "VeryLazy",
+  enabled = false,
+  event = "InsertEnter",
   dependencies = {
     -- {
     --   "L3MON4D3/LuaSnip",
