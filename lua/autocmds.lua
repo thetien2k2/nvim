@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local autocmd = vim.api.nvim_create_autocmd
 
 -- add gotmpl filetype
@@ -11,12 +12,12 @@ autocmd({ "BufEnter", "BufNewFile", "BufFilePost" }, {
 })
 
 -- unfold all first 
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-  pattern = "*",
-  callback = function()
-    vim.api.nvim_feedkeys("zR", "n", false)
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+--   pattern = "*",
+--   callback = function()
+--     vim.api.nvim_feedkeys("zR", "n", false)
+--   end,
+-- })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

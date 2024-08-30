@@ -15,7 +15,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = " ", trail = "󰇘", nbsp = "󱁐" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
@@ -34,11 +34,6 @@ vim.opt.softtabstop = 2
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 -- vim.opt.whichwrap:append "<>[]hl"
--- disable some default providers
--- vim.g.loaded_node_provider = 0
--- vim.g.loaded_python3_provider = 0
--- vim.g.loaded_perl_provider = 0
--- vim.g.loaded_ruby_provider = 0
 -- vim.opt.linebreak = true
 
 vim.wo.foldmethod = "expr"

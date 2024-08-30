@@ -2,16 +2,6 @@
 return {
   "stevearc/conform.nvim",
   event = "VeryLazy",
-  keys = {
-    {
-      "<leader>f",
-      function()
-        require("conform").format { async = true, lsp_format = "fallback" }
-      end,
-      mode = "",
-      desc = "format buffer",
-    },
-  },
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
