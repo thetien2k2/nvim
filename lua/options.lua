@@ -14,8 +14,6 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.list = true
-vim.opt.listchars = { tab = " ", trail = "󰇘", nbsp = "󱁐" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
@@ -25,8 +23,10 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-
--- vim.opt.laststatus = 3
+vim.opt.laststatus = 3
+vim.g.netrw_liststyle = 3
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = " ", trail = "󰇘", nbsp = "󱁐" }
 -- vim.opt.fillchars = { eob = " " }
 -- vim.opt.numberwidth = 2
 -- vim.opt.ruler = false
