@@ -38,4 +38,7 @@ vim.g.netrw_liststyle = 3
 
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 3
 vim.o.completeopt = "menuone,noselect,noinsert,popup"

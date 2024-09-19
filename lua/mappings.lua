@@ -12,19 +12,9 @@ wk.add {
 }
 
 -- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "clear highlights" })
 -- map("n", "<Esc>", "<cmd>noh<CR>", { desc = "clear highlights" })
-
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
 -- map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "exit terminal mode" })
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move line down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
 -- map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 -- map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 -- map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
@@ -32,6 +22,12 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
 -- map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "copy whole file" })
 -- map("n", "<tab>", "<cmd>bnext<cr>", { desc = "next buffer" })
 -- map("n", "<S-tab>", "<cmd>bprevious<cr>", { desc = "prev buffer" })
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move line down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
 map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "netrw" })
 map("n", "<leader>r", "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>", { desc = "print tree" })
 map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
@@ -105,15 +101,17 @@ end, { desc = "conform.format" })
 local fzf = require "fzf-lua"
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
 map("n", "<leader>p", fzf.files, { desc = "files" })
-map("n", "<leader>c", fzf.commands, { desc = "commands" })
-map("n", "<leader>l", fzf.live_grep, { desc = "live grep" })
+map("n", "<leader>k", fzf.commands, { desc = "commands" })
+map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
-map("n", "<leader>b", fzf.builtin, { desc = "fzf builtin" })
+map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
+map("n", "<leader>wd", fzf.diagnostics_workspace, { desc = "diagnostics_workspace" })
+map("n", "<leader>dd", fzf.diagnostics_document, { desc = "diagnostics_document" })
 
 -- map("n", "<leader>so", fzf.oldfiles, { desc = "old files" })
 -- map("n", "<leader>sc", fzf.command_history, { desc = "command history" })
 -- map("n", "<leader>ss", fzf.search_history, { desc = "search history" })
-map("n", "<leader>sh", fzf.help_tags, { desc = "help tags" })
+map("n", "<leader>sh", fzf.help_tags, { desc = "help_tags" })
 -- map("n", "<leader>s`", fzf.marks, { desc = "marks" })
 -- map("n", "<leader>sq", fzf.quickfix, { desc = "quickfix" })
 -- map("n", "<leader>sQ", fzf.quickfixhistory, { desc = "quickfix history" })
@@ -126,13 +124,6 @@ map("n", "<leader>sh", fzf.help_tags, { desc = "help tags" })
 -- map("n", "<leader>sk", fzf.keymaps, { desc = "keymaps" })
 -- map("n", "<leader>s.", fzf.resume, { desc = "resume" })
 -- map("n", "<leader>sp", fzf.pickers, { desc = "previous pickers" })
--- local map = function(keys, func, desc, mode)
---   mode = mode or "n"
---   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
--- end
---
--- map("<leader>q", vim.diagnostic.setloclist, "diagnostic quickfix")
--- --  To jump back, press <C-t>.
 -- map("<leader>cd", require("fzf-lua").lsp_definitions, "definition")
 -- map("<leader>cD", require("fzf-lua").lsp_declarations, "Declaration")
 -- map("<leader>cr", require("fzf-lua").lsp_references, "references")
@@ -141,24 +132,6 @@ map("n", "<leader>sh", fzf.help_tags, { desc = "help tags" })
 -- map("<leader>ds", require("fzf-lua").lsp_document_symbols, "symbols")
 -- map("<leader>ws", require("fzf-lua").lsp_workspace_symbols, "symbols")
 -- map("<leader>wl", require("fzf-lua").lsp_workspace_symbols, "live symbols")
---
-
---
--- map("n", "<leader>lql", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
--- map("n", "<leader>lqq", vim.diagnostic.setqflist, { desc = "lsp diagnostic quickfix" })
--- map("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "references" })
--- map("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { desc = "definitions" })
--- map("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "type definitions" })
--- map("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { desc = "implementations" })
--- map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "document symbols" })
--- map("n", "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "workspace symbols" })
--- map("n", "<leader>ll", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "query ws symbols" })
--- map("n", "<leader>lI", "<cmd>Telescope lsp_incoming_calls<CR>", { desc = "incoming calls" })
--- map("n", "<leader>lO", "<cmd>Telescope lsp_outgoing_calls<CR>", { desc = "outgoing calls" })
--- map("n", "<leader>lf", "<cmd>Telescope lsp_finder<CR>", { desc = "locations" })
---
--- map("n", "<leader>lqd", "<cmd>Telescope diagnostics_document<CR>", { desc = "document diagnostics" })
--- map("n", "<leader>lqw", "<cmd>Telescope diagnostics_workspace<CR>", { desc = "workspace diagnostics" })
 
 -- gitsigns
 local gitsigns = require "gitsigns"
@@ -168,7 +141,7 @@ map("n", "]c", function()
   else
     gitsigns.nav_hunk "next"
   end
-end, { desc = "Jump to next git [c]hange" })
+end, { desc = "Jump to next git change" })
 
 map("n", "[c", function()
   if vim.wo.diff then
@@ -176,7 +149,7 @@ map("n", "[c", function()
   else
     gitsigns.nav_hunk "prev"
   end
-end, { desc = "Jump to previous git [c]hange" })
+end, { desc = "Jump to previous git change" })
 map("v", "<leader>hs", function()
   gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
 end, { desc = "stage git hunk" })
@@ -198,7 +171,6 @@ map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "git show bl
 map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "git show deleted" })
 
 -- lsp
-
 -- default lsp keymaps in next release
 map("n", "grn", vim.lsp.buf.rename, { desc = "lsp.buf.rename" })
 map({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "code_action" })
@@ -208,8 +180,9 @@ map("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "signature_help" })
 map("n", "grt", vim.lsp.buf.type_definition, { desc = "type_definition" })
 map("n", "grd", vim.lsp.buf.declaration, { desc = "decalration" })
 map("n", "gri", vim.lsp.buf.implementation, { desc = "implementation" })
--- map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
--- map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
--- map("n", "<leader>lwl", function()
---   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
--- end, { desc = "list workspace folders" })
+map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
+map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
+map("n", "<leader>wl", function()
+  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, { desc = "list_workspace_folders" })
+map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "diagnostic" })
