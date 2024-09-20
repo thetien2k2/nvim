@@ -106,7 +106,9 @@ map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
 map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
 map("n", "<leader>wd", fzf.diagnostics_workspace, { desc = "diagnostics_workspace" })
+map("n", "<leader>ws", fzf.lsp_live_workspace_symbols, { desc = "lsp_live_workspace_symbols" })
 map("n", "<leader>dd", fzf.diagnostics_document, { desc = "diagnostics_document" })
+map("n", "<leader>ds", fzf.lsp_document_symbols, { desc = "lsp_document_symbols" })
 
 -- map("n", "<leader>so", fzf.oldfiles, { desc = "old files" })
 -- map("n", "<leader>sc", fzf.command_history, { desc = "command history" })
@@ -129,9 +131,6 @@ map("n", "<leader>sh", fzf.help_tags, { desc = "help_tags" })
 -- map("<leader>cr", require("fzf-lua").lsp_references, "references")
 -- map("<leader>ci", require("fzf-lua").lsp_implementations, "implementation")
 -- map("<leader>ct", require("fzf-lua").lsp_typedefs, "type definition")
--- map("<leader>ds", require("fzf-lua").lsp_document_symbols, "symbols")
--- map("<leader>ws", require("fzf-lua").lsp_workspace_symbols, "symbols")
--- map("<leader>wl", require("fzf-lua").lsp_workspace_symbols, "live symbols")
 
 -- gitsigns
 local gitsigns = require "gitsigns"
