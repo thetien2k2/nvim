@@ -118,9 +118,9 @@ return {
           },
         },
       },
-      tsserver = {
+      ts_ls = {
         settings = {
-          tsserver = {
+          ts_ls = {
             semanticTokens = true,
           },
         },
