@@ -5,7 +5,6 @@ wk.add {
   { "<leader>s", group = "search" },
   { "<leader>d", group = "document" },
   { "<leader>w", group = "workspace" },
-  { "<leader>r", group = "rename" },
   { "<leader>t", group = "toggle" },
   { "<leader>h", group = "git hunk", mode = { "n", "v" } },
   { "<leader>c", group = "code", mode = { "n", "v" } },
@@ -101,36 +100,21 @@ end, { desc = "conform.format" })
 local fzf = require "fzf-lua"
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
 map("n", "<leader>p", fzf.files, { desc = "files" })
-map("n", "<leader>k", fzf.commands, { desc = "commands" })
-map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
+map("v", "<leader>g", fzf.grep_visual, { desc = "grep" })
+map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
+map("n", "<leader>j", fzf.resume, { desc = "resume last comamnd/query" })
+map("n", "<leader>k", fzf.live_grep_resume, { desc = "live_grep_resume" })
 map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
 map("n", "<leader>wd", fzf.diagnostics_workspace, { desc = "diagnostics_workspace" })
 map("n", "<leader>ws", fzf.lsp_live_workspace_symbols, { desc = "lsp_live_workspace_symbols" })
 map("n", "<leader>dd", fzf.diagnostics_document, { desc = "diagnostics_document" })
 map("n", "<leader>ds", fzf.lsp_document_symbols, { desc = "lsp_document_symbols" })
-
--- map("n", "<leader>so", fzf.oldfiles, { desc = "old files" })
--- map("n", "<leader>sc", fzf.command_history, { desc = "command history" })
--- map("n", "<leader>ss", fzf.search_history, { desc = "search history" })
+map("n", "<leader>dt", fzf.treesitter, { desc = "treesitter" })
+map("n", "<leader>sw", fzf.grep_cword, { desc = "grep_cword" })
+map("n", "<leader>sW", fzf.grep_cWORD, { desc = "grep_cWORD" })
 map("n", "<leader>sh", fzf.help_tags, { desc = "help_tags" })
--- map("n", "<leader>s`", fzf.marks, { desc = "marks" })
--- map("n", "<leader>sq", fzf.quickfix, { desc = "quickfix" })
--- map("n", "<leader>sQ", fzf.quickfixhistory, { desc = "quickfix history" })
--- map("n", "<leader>sl", fzf.loclist, { desc = "location" })
--- map("n", "<leader>sj", fzf.jumplist, { desc = "jump" })
--- map("n", "<leader>sO", fzf.vim_options, { desc = "vim options" })
--- map("n", '<leader>s"', fzf.registers, { desc = "registers" })
--- map("n", "<leader>sa", fzf.autocommands, { desc = "autocommands" })
--- map("n", "<leader>sz", fzf.current_buffer_fuzzy_find, { desc = "fuzzy current buffer" })
--- map("n", "<leader>sk", fzf.keymaps, { desc = "keymaps" })
--- map("n", "<leader>s.", fzf.resume, { desc = "resume" })
--- map("n", "<leader>sp", fzf.pickers, { desc = "previous pickers" })
--- map("<leader>cd", require("fzf-lua").lsp_definitions, "definition")
--- map("<leader>cD", require("fzf-lua").lsp_declarations, "Declaration")
--- map("<leader>cr", require("fzf-lua").lsp_references, "references")
--- map("<leader>ci", require("fzf-lua").lsp_implementations, "implementation")
--- map("<leader>ct", require("fzf-lua").lsp_typedefs, "type definition")
+map("n", "<leader>ss", fzf.search_history, { desc = "search_history" })
 
 -- gitsigns
 local gitsigns = require "gitsigns"
