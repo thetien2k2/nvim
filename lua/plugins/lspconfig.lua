@@ -105,6 +105,7 @@ return {
       },
       cssls = {},
       gopls = {
+        filetypes = { "go", "gotmpl" },
         settings = {
           gopls = {
             semanticTokens = true,
