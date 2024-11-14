@@ -28,7 +28,12 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
 map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "netrw" })
-map("n", "<leader>r", "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>", { desc = "print tree" })
+map(
+  "n",
+  "<leader>r",
+  "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>",
+  { desc = "print tree" }
+)
 map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
 map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
 map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
@@ -93,6 +98,25 @@ cmp.setup {
   },
 }
 
+wk.add {
+  { "gs", group = "surround", mode = { "n", "v" } },
+}
+require("nvim-surround").setup {
+  keymaps = {
+    insert = "<C-g>s",
+    insert_line = "<C-g>S",
+    normal = "gsa",
+    normal_line = "gsA",
+    normal_cur = "gss",
+    normal_cur_line = "gsS",
+    visual = "gsv",
+    visual_line = "gsV",
+    delete = "gsd",
+    change = "gsc",
+    change_line = "gsC",
+  },
+}
+
 map("n", "<leader>f", function()
   require("conform").format { async = true, lsp_format = "fallback" }
 end, { desc = "conform.format" })
@@ -153,6 +177,9 @@ end, { desc = "Diff against last commit" })
 map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "git show blame line" })
 map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "git show deleted" })
 
+wk.add {
+  { "gr", group = "lsp" },
+}
 -- lsp
 -- default lsp keymaps in next release
 map("n", "grn", vim.lsp.buf.rename, { desc = "lsp.buf.rename" })

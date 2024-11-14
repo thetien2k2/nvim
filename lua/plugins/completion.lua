@@ -91,14 +91,6 @@ return {
             TypeParameter = "",
           }
           vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-          -- vim_item.menu = ({
-          --   nvim_lsp = "lsp",
-          --   nvim_lua = "api",
-          --   luasnip = "snip",
-          --   buffer = "buffer",
-          --   path = "path",
-          --   cmdline = "cmd",
-          -- })[entry.source.name]
 
           return vim_item
         end,

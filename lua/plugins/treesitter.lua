@@ -25,6 +25,7 @@ return {
         "templ",
         "typescript",
         "javascript",
+        "json",
         "css",
         "html",
       },
