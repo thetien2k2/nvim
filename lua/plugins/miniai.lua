@@ -1,5 +1,6 @@
 return {
-  "kylechui/nvim-surround",
+  "echasnovski/mini.ai",
+  version = "*",
   enabled = false,
   event = "VeryLazy",
   config = function()

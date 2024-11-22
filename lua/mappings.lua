@@ -1,17 +1,16 @@
 ---@diagnostic disable: undefined-global
 local map = vim.keymap.set
 local wk = require "which-key"
-wk.add {
-  { "<leader>s", group = "search" },
-  { "<leader>d", group = "document" },
-  { "<leader>w", group = "workspace" },
-  { "<leader>t", group = "toggle" },
-  { "<leader>h", group = "git hunk", mode = { "n", "v" } },
-  { "<leader>c", group = "code", mode = { "n", "v" } },
-}
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "clear highlights" })
+map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "netrw" })
+map(
+  "n",
+  "<leader>r",
+  "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>",
+  { desc = "print tree" }
+)
 -- map("n", "<Esc>", "<cmd>noh<CR>", { desc = "clear highlights" })
 -- map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "exit terminal mode" })
 -- map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
@@ -21,36 +20,27 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "clear highlights" })
 -- map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "copy whole file" })
 -- map("n", "<tab>", "<cmd>bnext<cr>", { desc = "next buffer" })
 -- map("n", "<S-tab>", "<cmd>bprevious<cr>", { desc = "prev buffer" })
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move line down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
-map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "netrw" })
-map(
-  "n",
-  "<leader>r",
-  "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>",
-  { desc = "print tree" }
-)
-map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
-map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
-map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
+-- map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
+-- map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })
+-- map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move line down" })
+-- map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
+-- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
+-- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
+
+-- wk.add {
+--   { "<leader>t", group = "toggle" },
+-- }
+-- map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
+-- map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
+-- map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
 local cmp = require "cmp"
 cmp.setup {
   mapping = cmp.mapping.preset.insert {
-    -- Select the [n]ext item
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    -- Select the [p]revious item
     ["<C-p>"] = cmp.mapping.select_prev_item(),
-    -- Scroll the documentation window [b]ack / [f]orward
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    -- Accept ([y]es) the completion.
-    --  This will auto-import if your LSP supports it.
-    --  This will expand snippets if the LSP sent a snippet.
     ["<C-y>"] = cmp.mapping.confirm { select = true },
     -- ["<CR>"] = cmp.mapping.confirm { select = false },
     -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
@@ -64,18 +54,9 @@ cmp.setup {
     --  completions whenever it has completion options available.
     ["<C-Space>"] = cmp.mapping.complete {},
 
-    -- Think of <c-l> as moving to the right of your snippet expansion.
-    --  So if you have a snippet that's like:
-    --  function $name($args)
-    --    $body
-    --  end
-    --
     -- <c-l> will move you to the right of each of the expansion locations.
     -- <c-h> is similar, except moving you backwards.
     ["<C-l>"] = cmp.mapping(function()
-      -- if luasnip.expand_or_locally_jumpable() then
-      --   luasnip.expand_or_jump()
-      -- end
       if vim.snippet.active { direction = 1 } then
         vim.schedule(function()
           vim.snippet.jump(1)
@@ -83,51 +64,52 @@ cmp.setup {
       end
     end, { "i", "s" }),
     ["<C-h>"] = cmp.mapping(function()
-      -- if luasnip.locally_jumpable(-1) then
-      --   luasnip.jump(-1)
-      -- end
       if vim.snippet.active { direction = -1 } then
         vim.schedule(function()
           vim.snippet.jump(-1)
         end)
       end
     end, { "i", "s" }),
-
-    -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-    --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
   },
 }
 
-wk.add {
-  { "gs", group = "surround", mode = { "n", "v" } },
-}
-require("nvim-surround").setup {
-  keymaps = {
-    insert = "<C-g>s",
-    insert_line = "<C-g>S",
-    normal = "gsa",
-    normal_line = "gsA",
-    normal_cur = "gss",
-    normal_cur_line = "gsS",
-    visual = "gsv",
-    visual_line = "gsV",
-    delete = "gsd",
-    change = "gsc",
-    change_line = "gsC",
-  },
-}
+-- wk.add {
+--   { "gs", group = "surround", mode = { "n", "v" } },
+-- }
+-- require("nvim-surround").setup {
+--   keymaps = {
+--     insert = "<C-g>s",
+--     insert_line = "<C-g>S",
+--     normal = "gsa",
+--     normal_line = "gsA",
+--     normal_cur = "gss",
+--     normal_cur_line = "gsS",
+--     visual = "gsv",
+--     visual_line = "gsV",
+--     delete = "gsd",
+--     change = "gsc",
+--     change_line = "gsC",
+--   },
+-- }
 
 map("n", "<leader>f", function()
   require("conform").format { async = true, lsp_format = "fallback" }
 end, { desc = "conform.format" })
 
 local fzf = require "fzf-lua"
+wk.add {
+  { "<leader>s", group = "search/swap" },
+  { "<leader>d", group = "document" },
+  { "<leader>w", group = "workspace" },
+}
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
 map("n", "<leader>p", fzf.files, { desc = "files" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
 map("v", "<leader>g", fzf.grep_visual, { desc = "grep" })
 map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
-map("n", "<leader>j", fzf.resume, { desc = "resume last comamnd/query" })
+map("n", "<leader>j", fzf.jumps, { desc = "jumps" })
+map("n", "<leader>m", fzf.marks, { desc = "marks" })
+map("n", "<leader>.", fzf.resume, { desc = "resume last comamnd/query" })
 map("n", "<leader>k", fzf.live_grep_resume, { desc = "live_grep_resume" })
 map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
 map("n", "<leader>wd", fzf.diagnostics_workspace, { desc = "diagnostics_workspace" })
@@ -157,6 +139,9 @@ map("n", "[c", function()
     gitsigns.nav_hunk "prev"
   end
 end, { desc = "Jump to previous git change" })
+wk.add {
+  { "<leader>h", group = "git hunk", mode = { "n", "v" } },
+}
 map("v", "<leader>hs", function()
   gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
 end, { desc = "stage git hunk" })
@@ -174,8 +159,8 @@ map("n", "<leader>hd", gitsigns.diffthis, { desc = "diff against index" })
 map("n", "<leader>hD", function()
   gitsigns.diffthis "@"
 end, { desc = "Diff against last commit" })
-map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "git show blame line" })
-map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "git show deleted" })
+map("n", "<leader>ht", gitsigns.toggle_current_line_blame, { desc = "toggle_current_line_blame" })
+map("n", "<leader>hT", gitsigns.toggle_deleted, { desc = "toggle_deleted" })
 
 wk.add {
   { "gr", group = "lsp" },
@@ -185,11 +170,14 @@ wk.add {
 map("n", "grn", vim.lsp.buf.rename, { desc = "lsp.buf.rename" })
 map({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "code_action" })
 map("n", "grr", vim.lsp.buf.references, { desc = "references" })
+map("n", "gri", vim.lsp.buf.implementation, { desc = "implementation" })
+map("n", "gO", vim.lsp.buf.document_symbol, { desc = "document_symbol" })
 map("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "signature_help" })
 -- custom lsp keymaps
 map("n", "grt", vim.lsp.buf.type_definition, { desc = "type_definition" })
-map("n", "grd", vim.lsp.buf.declaration, { desc = "decalration" })
-map("n", "gri", vim.lsp.buf.implementation, { desc = "implementation" })
+-- Many servers do not implement this method
+-- map("n", "grd", vim.lsp.buf.declaration, { desc = "decalration" })
+
 map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
 map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
 map("n", "<leader>wl", function()

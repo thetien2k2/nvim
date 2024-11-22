@@ -4,6 +4,9 @@ return {
   event = "VeryLazy",
   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
   build = ":TSUpdate",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
   opts = function()
     pcall(function()
       dofile(vim.g.base46_cache .. "syntax")
