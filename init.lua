@@ -1,12 +1,8 @@
 ---@diagnostic disable: undefined-global
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-local cscheme = "tokyonight"
-
 require "options"
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -17,6 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local cscheme = "tokyonight-moon"
 require("lazy").setup("plugins", {
   defaults = {
     lazy = false,
@@ -27,39 +24,39 @@ require("lazy").setup("plugins", {
   performance = {
     rtp = {
       disabled_plugins = {
-        -- "2html_plugin",
-        -- "tohtml",
-        -- "getscript",
-        -- "getscriptPlugin",
-        -- "gzip",
-        -- "logipat",
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
         -- "netrw",
         -- "netrwPlugin",
         -- "netrwSettings",
         -- "netrwFileHandlers",
-        -- "matchit",
-        -- "tar",
-        -- "tarPlugin",
-        -- "rrhelper",
-        -- "spellfile_plugin",
-        -- "vimball",
-        -- "vimballPlugin",
-        -- "zip",
-        -- "zipPlugin",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
         "tutor",
-        -- "rplugin",
-        -- "syntax",
-        -- "synmenu",
-        -- "optwin",
-        -- "compiler",
-        -- "bugreport",
-        -- "ftplugin",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
       },
     },
   },
 })
 
 vim.cmd { cmd = "colorscheme", args = { cscheme } }
-
 require "mappings"
 require "autocmds"
+require "plugins-setup"

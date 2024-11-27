@@ -34,44 +34,45 @@ map(
 -- map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
 -- map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
-local cmp = require "cmp"
-cmp.setup {
-  mapping = cmp.mapping.preset.insert {
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-y>"] = cmp.mapping.confirm { select = true },
-    -- ["<CR>"] = cmp.mapping.confirm { select = false },
-    -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
-    -- ["<C-CR>"] = function(fallback)
-    --   cmp.abort()
-    --   fallback()
-    -- end,
 
-    -- Manually trigger a completion from nvim-cmp.
-    --  Generally you don't need this, because nvim-cmp will display
-    --  completions whenever it has completion options available.
-    ["<C-Space>"] = cmp.mapping.complete {},
-
-    -- <c-l> will move you to the right of each of the expansion locations.
-    -- <c-h> is similar, except moving you backwards.
-    ["<C-l>"] = cmp.mapping(function()
-      if vim.snippet.active { direction = 1 } then
-        vim.schedule(function()
-          vim.snippet.jump(1)
-        end)
-      end
-    end, { "i", "s" }),
-    ["<C-h>"] = cmp.mapping(function()
-      if vim.snippet.active { direction = -1 } then
-        vim.schedule(function()
-          vim.snippet.jump(-1)
-        end)
-      end
-    end, { "i", "s" }),
-  },
-}
+-- local cmp = require "cmp"
+-- cmp.setup {
+--   mapping = cmp.mapping.preset.insert {
+--     ["<C-n>"] = cmp.mapping.select_next_item(),
+--     ["<C-p>"] = cmp.mapping.select_prev_item(),
+--     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+--     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+--     ["<C-y>"] = cmp.mapping.confirm { select = true },
+--     -- ["<CR>"] = cmp.mapping.confirm { select = false },
+--     -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
+--     -- ["<C-CR>"] = function(fallback)
+--     --   cmp.abort()
+--     --   fallback()
+--     -- end,
+--
+--     -- Manually trigger a completion from nvim-cmp.
+--     --  Generally you don't need this, because nvim-cmp will display
+--     --  completions whenever it has completion options available.
+--     ["<C-Space>"] = cmp.mapping.complete {},
+--
+--     -- <c-l> will move you to the right of each of the expansion locations.
+--     -- <c-h> is similar, except moving you backwards.
+--     ["<C-l>"] = cmp.mapping(function()
+--       if vim.snippet.active { direction = 1 } then
+--         vim.schedule(function()
+--           vim.snippet.jump(1)
+--         end)
+--       end
+--     end, { "i", "s" }),
+--     ["<C-h>"] = cmp.mapping(function()
+--       if vim.snippet.active { direction = -1 } then
+--         vim.schedule(function()
+--           vim.snippet.jump(-1)
+--         end)
+--       end
+--     end, { "i", "s" }),
+--   },
+-- }
 
 -- wk.add {
 --   { "gs", group = "surround", mode = { "n", "v" } },
