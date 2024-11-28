@@ -34,69 +34,63 @@ map(
 -- map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
 -- map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
+-- cmp & snippets
+local cmp = require "cmp"
+local ls = require "luasnip"
+cmp.setup {
+  mapping = cmp.mapping.preset.insert {
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-y>"] = cmp.mapping.confirm { select = true },
+    -- ["<CR>"] = cmp.mapping.confirm { select = false },
+    -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
+    -- ["<C-CR>"] = function(fallback)
+    --   cmp.abort()
+    --   fallback()
+    -- end,
 
--- local cmp = require "cmp"
--- cmp.setup {
---   mapping = cmp.mapping.preset.insert {
---     ["<C-n>"] = cmp.mapping.select_next_item(),
---     ["<C-p>"] = cmp.mapping.select_prev_item(),
---     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
---     ["<C-f>"] = cmp.mapping.scroll_docs(4),
---     ["<C-y>"] = cmp.mapping.confirm { select = true },
---     -- ["<CR>"] = cmp.mapping.confirm { select = false },
---     -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
---     -- ["<C-CR>"] = function(fallback)
---     --   cmp.abort()
---     --   fallback()
---     -- end,
---
---     -- Manually trigger a completion from nvim-cmp.
---     --  Generally you don't need this, because nvim-cmp will display
---     --  completions whenever it has completion options available.
---     ["<C-Space>"] = cmp.mapping.complete {},
---
---     -- <c-l> will move you to the right of each of the expansion locations.
---     -- <c-h> is similar, except moving you backwards.
---     ["<C-l>"] = cmp.mapping(function()
---       if vim.snippet.active { direction = 1 } then
---         vim.schedule(function()
---           vim.snippet.jump(1)
---         end)
---       end
---     end, { "i", "s" }),
---     ["<C-h>"] = cmp.mapping(function()
---       if vim.snippet.active { direction = -1 } then
---         vim.schedule(function()
---           vim.snippet.jump(-1)
---         end)
---       end
---     end, { "i", "s" }),
---   },
--- }
+    -- Manually trigger a completion from nvim-cmp.
+    --  Generally you don't need this, because nvim-cmp will display
+    --  completions whenever it has completion options available.
+    ["<C-Space>"] = cmp.mapping.complete {},
+  },
+}
+map("i", "<C-k>", function()
+  if ls.expandable() then
+    return ls.expand()
+  else
+    return "<C-k>"
+  end
+end, { silent = true })
+map({ "i", "s" }, "<C-l>", function()
+  if ls.jumpable(1) then
+    return ls.jump(1)
+  else
+    return "<C-l>"
+  end
+end, { silent = true })
+map({ "i", "s" }, "<C-j>", function()
+  if ls.jumpable(-1) then
+    return ls.jump(-1)
+  else
+    return "<C-j>"
+  end
+end, { silent = true })
+map({ "i", "s" }, "<C-e>", function()
+  if ls.choice_active() then
+    return ls.change_choice(1)
+  else
+    return "<C-e>"
+  end
+end, { silent = true })
 
--- wk.add {
---   { "gs", group = "surround", mode = { "n", "v" } },
--- }
--- require("nvim-surround").setup {
---   keymaps = {
---     insert = "<C-g>s",
---     insert_line = "<C-g>S",
---     normal = "gsa",
---     normal_line = "gsA",
---     normal_cur = "gss",
---     normal_cur_line = "gsS",
---     visual = "gsv",
---     visual_line = "gsV",
---     delete = "gsd",
---     change = "gsc",
---     change_line = "gsC",
---   },
--- }
-
-map("n", "<leader>f", function()
+map({ "n", "v" }, "<leader>f", function()
   require("conform").format { async = true, lsp_format = "fallback" }
 end, { desc = "conform.format" })
 
+-- fzf
 local fzf = require "fzf-lua"
 wk.add {
   { "<leader>s", group = "search/swap" },

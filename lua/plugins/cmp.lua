@@ -1,9 +1,15 @@
 ---@diagnostic disable: undefined-global
 return {
   "hrsh7th/nvim-cmp",
-  enabled = false,
   version = false,
+  event = "VeryLazy",
   dependencies = {
+    {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      build = "make install_jsregexp",
+    },
+    "saadparwaiz1/cmp_luasnip",
     {
       "windwp/nvim-autopairs",
       opts = {
@@ -28,8 +34,11 @@ return {
     cmp.setup {
       snippet = {
         expand = function(args)
-          vim.snippet.expand(args.body)
+          require("luasnip").lsp_expand(args.body)
         end,
+      },
+      view = {
+        entries = { "custom", selection_order = "top_down" },
       },
       window = {
         completion = {
@@ -74,16 +83,16 @@ return {
         end,
       },
       sources = cmp.config.sources({
+        { name = "luasnip" },
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
       }, {
         { name = "buffer" },
-        { name = "path" },
-        { name = "cmdline" },
+        -- { name = "path" },
+        -- { name = "cmdline" },
       }),
     }
 
-    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
@@ -91,8 +100,10 @@ return {
       },
     })
 
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(":", {
+      view = {
+        entries = { "custom", selection_order = "near_cursor" },
+      },
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" },

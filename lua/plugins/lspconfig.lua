@@ -2,17 +2,7 @@
 return {
   "neovim/nvim-lspconfig",
   lazy = false,
-  dependencies = {
-    { "ms-jpq/coq_nvim", branch = "coq" },
-    { "ms-jpq/coq.artifacts", branch = "artifacts" },
-    { "ms-jpq/coq.thirdparty", branch = "3p" },
-  },
-  init = function()
-    vim.g.coq_settings = {
-      auto_start = true, -- if you want to start COQ at startup
-      -- Your COQ settings here
-    }
-  end,
+  dependencies = {},
   config = function()
     -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
     -- and elegantly composed help section, `:help lsp-vs-treesitter`
@@ -70,7 +60,7 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     -- capabilities.textDocument.completion.completionItem = {
     --   documentationFormat = { "markdown", "plaintext" },
     --   snippetSupport = true,
@@ -138,11 +128,9 @@ return {
       },
     }
     local lsp = require "lspconfig"
-    local coq = require "coq"
     for name, opts in pairs(servers) do
       opts.capabilities = capabilities
-      -- require("lspconfig")[name].setup(opts)
-      lsp[name].setup(coq.lsp_ensure_capabilities(opts))
+      lsp[name].setup(opts)
     end
   end,
 }
