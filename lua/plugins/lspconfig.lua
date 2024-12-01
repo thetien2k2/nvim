@@ -105,7 +105,7 @@ return {
       },
       cssls = {},
       gopls = {
-        filetypes = { "go", "gotmpl" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
         settings = {
           gopls = {
             semanticTokens = true,
@@ -115,6 +115,15 @@ return {
             gofumpt = true,
             analyses = {
               unusedparams = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
             },
           },
         },

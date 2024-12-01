@@ -86,7 +86,7 @@ map({ "i", "s" }, "<C-e>", function()
   end
 end, { silent = true })
 
-map({ "n", "v" }, "<leader>f", function()
+map({ "n", "v" }, "<leader><tab>", function()
   require("conform").format { async = true, lsp_format = "fallback" }
 end, { desc = "conform.format" })
 
@@ -95,12 +95,13 @@ local fzf = require "fzf-lua"
 wk.add {
   { "<leader>s", group = "search/swap" },
   { "<leader>d", group = "document" },
+  { "<leader>t", group = "toggle" },
   { "<leader>w", group = "workspace" },
 }
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
-map("n", "<leader>p", fzf.files, { desc = "files" })
+map("n", "<leader>f", fzf.files, { desc = "files" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
-map("v", "<leader>g", fzf.grep_visual, { desc = "grep" })
+map("v", "<leader>g", fzf.grep_visual, { desc = "grep_visual" })
 map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
 map("n", "<leader>j", fzf.jumps, { desc = "jumps" })
 map("n", "<leader>m", fzf.marks, { desc = "marks" })
@@ -116,6 +117,31 @@ map("n", "<leader>sw", fzf.grep_cword, { desc = "grep_cword" })
 map("n", "<leader>sW", fzf.grep_cWORD, { desc = "grep_cWORD" })
 map("n", "<leader>sh", fzf.help_tags, { desc = "help_tags" })
 map("n", "<leader>ss", fzf.search_history, { desc = "search_history" })
+map("n", "<leader>th", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "hint" })
+map("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "wrap" })
+
+wk.add {
+  { "gr", group = "lsp" },
+}
+map("n", "grn", vim.lsp.buf.rename, { desc = "rename" })
+map({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "code_action" })
+map("n", "grr", vim.lsp.buf.references, { desc = "references" })
+map("n", "gri", vim.lsp.buf.implementation, { desc = "implementation" })
+map("n", "gO", vim.lsp.buf.document_symbol, { desc = "document_symbol" })
+map("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "signature_help" })
+map("n", "grt", vim.lsp.buf.type_definition, { desc = "type_definition" })
+map("n", "grd", vim.lsp.buf.definition, { desc = "definition" })
+map("n", "grD", vim.lsp.buf.declaration, { desc = "decalration" })
+map("n", "grf", vim.lsp.buf.format, { desc = "format" })
+map("n", "grh", vim.lsp.buf.typehierarchy, { desc = "typehierarchy" })
+map("n", "grFa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
+map("n", "grFr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
+map("n", "grFl", function()
+  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, { desc = "list_workspace_folders" })
+map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "diagnostic" })
 
 -- gitsigns
 local gitsigns = require "gitsigns"
@@ -156,26 +182,3 @@ map("n", "<leader>hD", function()
 end, { desc = "Diff against last commit" })
 map("n", "<leader>ht", gitsigns.toggle_current_line_blame, { desc = "toggle_current_line_blame" })
 map("n", "<leader>hT", gitsigns.toggle_deleted, { desc = "toggle_deleted" })
-
-wk.add {
-  { "gr", group = "lsp" },
-}
--- lsp
--- default lsp keymaps in next release
-map("n", "grn", vim.lsp.buf.rename, { desc = "lsp.buf.rename" })
-map({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "code_action" })
-map("n", "grr", vim.lsp.buf.references, { desc = "references" })
-map("n", "gri", vim.lsp.buf.implementation, { desc = "implementation" })
-map("n", "gO", vim.lsp.buf.document_symbol, { desc = "document_symbol" })
-map("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "signature_help" })
--- custom lsp keymaps
-map("n", "grt", vim.lsp.buf.type_definition, { desc = "type_definition" })
--- Many servers do not implement this method
--- map("n", "grd", vim.lsp.buf.declaration, { desc = "decalration" })
-
-map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
-map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
-map("n", "<leader>wl", function()
-  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, { desc = "list_workspace_folders" })
-map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "diagnostic" })

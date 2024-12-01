@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = "\\"
+vim.g.maplocalleader = "\\"
 require "options"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"

@@ -87,16 +87,40 @@ return {
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
       }, {
-        { name = "buffer" },
-        -- { name = "path" },
-        -- { name = "cmdline" },
+        {
+          name = "buffer",
+          option = {
+            get_bufnrs = function()
+              local buf = vim.api.nvim_get_current_buf()
+              local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+              if byte_size > 5 * 1024 * 1024 then
+                return {}
+              end
+              return { buf }
+            end,
+          },
+        },
+        { name = "path" },
+        { name = "cmdline" },
       }),
     }
 
     cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = "buffer" },
+        {
+          name = "buffer",
+          option = {
+            get_bufnrs = function()
+              local buf = vim.api.nvim_get_current_buf()
+              local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+              if byte_size > 3 * 1024 * 1024 then
+                return {}
+              end
+              return { buf }
+            end,
+          },
+        },
       },
     })
 
