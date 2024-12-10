@@ -6,6 +6,7 @@ return {
   config = function()
     require("fzf-lua").setup {
       -- "max-perf",
+      -- "fzf-native",
       winopts = {
         border = "single",
         preview = {

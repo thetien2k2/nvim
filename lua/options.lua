@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global
+vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -24,7 +25,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.laststatus = 3
 vim.g.netrw_liststyle = 3
-vim.o.completeopt = "menuone,noselect,noinsert,popup"
+vim.o.completeopt = "menu,menuone,noinsert,preview"
 vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.breakindent = true

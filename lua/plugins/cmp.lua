@@ -31,14 +31,33 @@ return {
 
   config = function()
     local cmp = require "cmp"
+    local compare = require "cmp.config.compare"
     cmp.setup {
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
         end,
       },
-      view = {
-        entries = { "custom", selection_order = "top_down" },
+      -- view = {
+      --   entries = { "custom", selection_order = "top_down" },
+      -- },
+      completion = {
+        completeopt = "menu,menuone,noinsert,preview",
+      },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          compare.exact,
+          compare.length,
+          compare.recently_used,
+          compare.order,
+          compare.score,
+          compare.offset,
+          -- compare.scopes,
+          compare.locality,
+          compare.kind,
+          -- compare.sort_text,
+        },
       },
       window = {
         completion = {
@@ -83,8 +102,8 @@ return {
         end,
       },
       sources = cmp.config.sources({
-        { name = "luasnip" },
         { name = "nvim_lsp" },
+        { name = "luasnip" },
         { name = "nvim_lua" },
       }, {
         {
@@ -100,8 +119,6 @@ return {
             end,
           },
         },
-        { name = "path" },
-        { name = "cmdline" },
       }),
     }
 
@@ -114,7 +131,7 @@ return {
             get_bufnrs = function()
               local buf = vim.api.nvim_get_current_buf()
               local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-              if byte_size > 3 * 1024 * 1024 then
+              if byte_size > 5 * 1024 * 1024 then
                 return {}
               end
               return { buf }

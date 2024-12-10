@@ -17,9 +17,12 @@ return {
       html = { "prettier" },
       markdown = { "prettier" },
       yaml = { "prettier" },
-      go = { "goimports" },
+      go = { "goimports", "gofumpt" },
     },
     default_format_opts = {
+      lsp_format = "fallback",
+    },
+    format_on_save = {
       lsp_format = "fallback",
     },
   },
