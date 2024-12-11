@@ -33,12 +33,19 @@ return {
         swap = {
           enable = true,
           swap_next = {
-            ["<leader>sa"] = "@parameter.inner", -- swap parameters/argument with next
-            ["<leader>sm"] = "@function.outer", -- swap function with next
+            ["gsa"] = "@parameter.inner", -- swap parameters/argument with next
+            ["gsm"] = "@function.outer", -- swap function with next
           },
           swap_previous = {
-            ["<leader>sA"] = "@parameter.inner", -- swap parameters/argument with prev
-            ["<leader>sM"] = "@function.outer", -- swap function with previous
+            ["gsA"] = "@parameter.inner", -- swap parameters/argument with prev
+            ["gsM"] = "@function.outer", -- swap function with previous
+          },
+        },
+        lsp_interop = {
+          enable = true,
+          peek_definition_code = {
+            ["gsf"] = "@function.outer",
+            ["gsc"] = "@class.outer",
           },
         },
         move = {
@@ -76,13 +83,6 @@ return {
             ["[C"] = { query = "@class.outer", desc = "class end" },
             ["[I"] = { query = "@conditional.outer", desc = "conditional end" },
             ["[L"] = { query = "@loop.outer", desc = "loop end" },
-          },
-        },
-        lsp_interop = {
-          enable = true,
-          peek_definition_code = {
-            ["<leader>df"] = "@function.outer",
-            ["<leader>dF"] = "@class.outer",
           },
         },
       },

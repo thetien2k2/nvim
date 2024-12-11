@@ -7,7 +7,7 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "clear highlights" })
 map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "netrw" })
 map(
   "n",
-  "<leader>r",
+  "<leader>R",
   "<cmd>enew | setlocal buftype=nowrite noswapfile | read ! tree --gitignore --dirsfirst<cr>",
   { desc = "print tree" }
 )
@@ -26,13 +26,6 @@ map(
 -- map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
 -- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
 -- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
-
--- wk.add {
---   { "<leader>t", group = "toggle" },
--- }
--- map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "wrap" })
--- map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
--- map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
 -- cmp & snippets
 local cmp = require "cmp"
@@ -83,19 +76,20 @@ map({ "i", "s" }, "<C-e>", function()
   end
 end, { silent = true })
 
-map({ "n", "v" }, "<leader><tab>", function()
-  require("conform").format { async = true, lsp_format = "fallback" }
-end, { desc = "conform.format" })
-
 -- fzf
 local fzf = require "fzf-lua"
-wk.add {
-  { "<leader>s", group = "search/swap" },
-  { "<leader>d", group = "document" },
-  { "<leader>t", group = "toggle" },
-  { "<leader>w", group = "workspace" },
-}
+-- wk.add {
+--   { "<leader>s", group = "search/swap" },
+--   { "<leader>d", group = "document" },
+--   { "<leader>w", group = "workspace" },
+-- }
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
+map("n", "<leader>s", fzf.lsp_document_symbols, { desc = "document_symbols" })
+map("n", "<leader>S", fzf.lsp_live_workspace_symbols, { desc = "workspace_symbols" })
+map("n", "<leader>d", fzf.diagnostics_document, { desc = "diag_document" })
+map("n", "<leader>D", fzf.diagnostics_workspace, { desc = "diag_workspace" })
+map("n", "<leader>r", fzf.lsp_references, { desc = "lsp_references" })
+map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
 map("n", "<leader>f", fzf.files, { desc = "files" })
 map("n", "<leader>g", fzf.grep, { desc = "grep" })
 map("v", "<leader>g", fzf.grep_visual, { desc = "grep_visual" })
@@ -104,23 +98,23 @@ map("n", "<leader>j", fzf.jumps, { desc = "jumps" })
 map("n", "<leader>m", fzf.marks, { desc = "marks" })
 map("n", "<leader>.", fzf.resume, { desc = "resume last comamnd/query" })
 map("n", "<leader>k", fzf.live_grep_resume, { desc = "live_grep_resume" })
-map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
-map("n", "<leader>wd", fzf.diagnostics_workspace, { desc = "diagnostics_workspace" })
-map("n", "<leader>ws", fzf.lsp_live_workspace_symbols, { desc = "lsp_live_workspace_symbols" })
-map("n", "<leader>dd", fzf.diagnostics_document, { desc = "diagnostics_document" })
-map("n", "<leader>ds", fzf.lsp_document_symbols, { desc = "lsp_document_symbols" })
-map("n", "<leader>dt", fzf.treesitter, { desc = "treesitter" })
-map("n", "<leader>sw", fzf.grep_cword, { desc = "grep_cword" })
-map("n", "<leader>sW", fzf.grep_cWORD, { desc = "grep_cWORD" })
-map("n", "<leader>sh", fzf.help_tags, { desc = "help_tags" })
-map("n", "<leader>ss", fzf.search_history, { desc = "search_history" })
+map("n", "<leader>T", fzf.treesitter, { desc = "treesitter" })
+map("n", "<leader>w", fzf.grep_cword, { desc = "grep_cword" })
+map("n", "<leader>W", fzf.grep_cWORD, { desc = "grep_cWORD" })
+map("n", "<leader>H", fzf.help_tags, { desc = "help_tags" })
+wk.add {
+  { "<leader>t", group = "toggle" },
+}
 map("n", "<leader>th", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "hint" })
 map("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "wrap" })
+map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "line number" })
+map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "relative number" })
 
 wk.add {
   { "gr", group = "lsp" },
+  { "gs", group = "treesitter" },
 }
 map("n", "grn", vim.lsp.buf.rename, { desc = "rename" })
 map({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "code_action" })
@@ -133,12 +127,12 @@ map("n", "grd", vim.lsp.buf.definition, { desc = "definition" })
 map("n", "grD", vim.lsp.buf.declaration, { desc = "decalration" })
 map("n", "grf", vim.lsp.buf.format, { desc = "format" })
 map("n", "grh", vim.lsp.buf.typehierarchy, { desc = "typehierarchy" })
+map("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic" })
 map("n", "grFa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
 map("n", "grFr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
 map("n", "grFl", function()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "list_workspace_folders" })
-map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "diagnostic" })
 
 -- gitsigns
 local gitsigns = require "gitsigns"
