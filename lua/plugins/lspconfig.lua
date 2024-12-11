@@ -61,6 +61,7 @@ return {
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
     -- capabilities.textDocument.completion.completionItem = {
     --   documentationFormat = { "markdown", "plaintext" },
     --   snippetSupport = true,
@@ -113,8 +114,10 @@ return {
             usePlaceholders = true,
             staticcheck = true,
             gofumpt = true,
+            experimentalPostfixCompletions = true,
             analyses = {
               unusedparams = true,
+              shadow = true,
             },
             hints = {
               assignVariableTypes = true,

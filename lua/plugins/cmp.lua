@@ -2,14 +2,9 @@
 return {
   "hrsh7th/nvim-cmp",
   version = false,
+  -- enabled = false,
   event = "VeryLazy",
   dependencies = {
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
-    },
-    "saadparwaiz1/cmp_luasnip",
     {
       "windwp/nvim-autopairs",
       opts = {
@@ -31,41 +26,17 @@ return {
 
   config = function()
     local cmp = require "cmp"
-    local compare = require "cmp.config.compare"
     cmp.setup {
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
         end,
       },
-      -- view = {
-      --   entries = { "custom", selection_order = "top_down" },
-      -- },
+      view = {
+        entries = { "native" },
+      },
       completion = {
-        completeopt = "menu,menuone,noinsert,preview",
-      },
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          compare.exact,
-          compare.length,
-          compare.recently_used,
-          compare.order,
-          compare.score,
-          compare.offset,
-          -- compare.scopes,
-          compare.locality,
-          compare.kind,
-          -- compare.sort_text,
-        },
-      },
-      window = {
-        completion = {
-          border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-        },
-        documentation = {
-          border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-        },
+        completeopt = "menu,menuone,noselect,noinsert,popup",
       },
       formatting = {
         format = function(entry, vim_item)
@@ -103,7 +74,6 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" },
         { name = "nvim_lua" },
       }, {
         {
@@ -142,9 +112,6 @@ return {
     })
 
     cmp.setup.cmdline(":", {
-      view = {
-        entries = { "custom", selection_order = "near_cursor" },
-      },
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" },
