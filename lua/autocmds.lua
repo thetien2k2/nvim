@@ -50,6 +50,7 @@ autocmd("LspAttach", {
             end,
             bufnr = args.buf,
             async = false,
+            timeout_ms = 10000,
           }
         end,
       })

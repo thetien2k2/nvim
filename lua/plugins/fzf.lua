@@ -8,12 +8,11 @@ return {
       -- "max-perf",
       "fzf-native",
       winopts = {
-        border = "none",
-        -- border = "single",
+        border = false,
+        height = 0.95,
+        width = 0.95,
         preview = {
           border = "noborder",
-          vertical = "down:65%",
-          layout = "vertical",
         },
       },
     }

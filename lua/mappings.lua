@@ -125,7 +125,12 @@ map("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "signature_help" })
 map("n", "grt", vim.lsp.buf.type_definition, { desc = "type_definition" })
 map("n", "grd", vim.lsp.buf.definition, { desc = "definition" })
 map("n", "grD", vim.lsp.buf.declaration, { desc = "decalration" })
-map("n", "grf", vim.lsp.buf.format, { desc = "format" })
+map("n", "grf", function()
+  vim.lsp.buf.format {
+    timeout_ms = 10000,
+    async = false,
+  }
+end, { desc = "format" })
 map("n", "grh", vim.lsp.buf.typehierarchy, { desc = "typehierarchy" })
 map("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic" })
 map("n", "grFa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
