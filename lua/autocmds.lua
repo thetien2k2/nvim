@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 local autocmd = vim.api.nvim_create_autocmd
 
 -- add gotmpl filetype
@@ -20,40 +19,71 @@ autocmd("TextYankPost", {
 })
 
 -- lsp autocommands
-autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+-- autocmd("LspAttach", {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if client.supports_method "textDocument/formatting" then
+--       vim.api.nvim_create_autocmd("BufWritePre", {
+--         buffer = args.buf,
+--         callback = function()
+--           vim.lsp.buf.format {
+--             filter = function()
+--               local file_type = vim.api.nvim_buf_get_option(args.buf, "filetype")
+--               local efm_format = false
+--               local ft_efm = { "go", "html", "css", "js", "ts", "makrdown" }
+--               if client.name == "emf" then
+--                 for i = 1, #ft_efm do
+--                   if file_type == ft_efm[i] then
+--                     efm_format = true
+--                     break
+--                   end
+--                 end
+--                 return efm_format
+--               end
+--               return true
+--             end,
+--             bufnr = args.buf,
+--             async = false,
+--             timeout_ms = 10000,
+--           }
+--         end,
+--       })
+--     end
+--   end,
+-- })
 
-    -- avoid breaking formatexpr
-    local function is_null_ls_formatting_enabled()
-      local file_type = vim.api.nvim_buf_get_option(args.buf, "filetype")
-      local generators =
-        require("null-ls.generators").get_available(file_type, require("null-ls.methods").internal.FORMATTING)
-      return #generators > 0
+autocmd("BufWritePre", {
+  callback = function(ev)
+    -- print(string.format('event fired: %s', vim.inspect(ev)))
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local ft = vim.api.nvim_get_option_value("filetype", {})
+    local formatters = {
+      ["lua"] = "lua_ls",
+      ["go"] = "efm",
+      ["gotmp"] = "efm",
+      ["gomod"] = "efm",
+      ["gowork"] = "efm",
+      ["html"] = "efm",
+      ["css"] = "efm",
+      ["json"] = "efm",
+      ["js"] = "efm",
+      ["ts"] = "efm",
+      ["markdown"] = "efm",
+      ["yaml"] = "efm",
+    }
+    if #clients == 0 then
+      vim.notify("unable to format: no lsp attached", vim.log.levels.WARN)
+      return
     end
-    if client.server_capabilities.documentFormattingProvider then
-      if client.name == "null-ls" and is_null_ls_formatting_enabled() or client.name ~= "null-ls" then
-        vim.bo[args.buf].formatexpr = "v:lua.vim.lsp.formatexpr()"
-      else
-        vim.bo[args.buf].formatexpr = nil
-      end
-    end
-
-    -- only use null-ls for formating on save
-    if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = args.buf,
-        callback = function()
-          vim.lsp.buf.format {
-            filter = function()
-              return client.name == "null-ls"
-            end,
-            bufnr = args.buf,
-            async = false,
-            timeout_ms = 10000,
-          }
+    if formatters[ft] ~= "" then
+      vim.lsp.buf.format {
+        filter = function(client)
+          return client.name == formatters[ft]
         end,
-      })
+        bufnr = ev.buf,
+        async = false,
+        timeout_ms = 10000
+      }
     end
-  end,
+  end
 })

@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.number = true

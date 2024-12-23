@@ -5,8 +5,8 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     require("fzf-lua").setup {
-      -- "max-perf",
-      "fzf-native",
+      "max-perf",
+      -- "fzf-native",
       winopts = {
         border = false,
         height = 0.95,

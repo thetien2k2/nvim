@@ -27,67 +27,81 @@ map(
 -- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "move line down" })
 -- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "move line up" })
 
--- cmp & snippets
-local cmp = require "cmp"
-cmp.setup {
-  mapping = cmp.mapping.preset.insert {
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-y>"] = cmp.mapping.confirm { select = true },
-    -- ["<CR>"] = cmp.mapping.confirm { select = false },
-    -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
-    -- ["<C-CR>"] = function(fallback)
-    --   cmp.abort()
-    --   fallback()
-    -- end,
-    ["<C-Space>"] = cmp.mapping.complete {},
-  },
-}
+-- cmp
+-- local cmp = require "cmp"
+-- cmp.setup {
+--   mapping = cmp.mapping.preset.insert {
+--     ["<C-n>"] = cmp.mapping.select_next_item(),
+--     ["<C-p>"] = cmp.mapping.select_prev_item(),
+--     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+--     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+--     ["<C-y>"] = cmp.mapping.confirm { select = true },
+--     -- ["<CR>"] = cmp.mapping.confirm { select = false },
+--     -- ["<S-CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
+--     -- ["<C-CR>"] = function(fallback)
+--     --   cmp.abort()
+--     --   fallback()
+--     -- end,
+--     ["<C-Space>"] = cmp.mapping.complete {},
+--   },
+-- }
 
-local ls = require "luasnip"
-map("i", "<C-k>", function()
-  if ls.expandable() then
-    return ls.expand()
-  else
-    return "<C-k>"
-  end
-end, { silent = true })
-map({ "i", "s" }, "<C-l>", function()
-  if ls.jumpable(1) then
-    return ls.jump(1)
-  else
-    return "<C-l>"
-  end
-end, { silent = true })
-map({ "i", "s" }, "<C-j>", function()
-  if ls.jumpable(-1) then
-    return ls.jump(-1)
-  else
-    return "<C-j>"
-  end
-end, { silent = true })
-map({ "i", "s" }, "<C-e>", function()
-  if ls.choice_active() then
-    return ls.change_choice(1)
-  else
-    return "<C-e>"
-  end
-end, { silent = true })
+-- luasnip
+-- local ls = require "luasnip"
+-- map("i", "<C-k>", function()
+--   if ls.expandable() then
+--     return ls.expand()
+--   else
+--     return "<C-k>"
+--   end
+-- end, { silent = true })
+-- map({ "i", "s" }, "<C-l>", function()
+--   if ls.jumpable(1) then
+--     return ls.jump(1)
+--   else
+--     return "<C-l>"
+--   end
+-- end, { silent = true })
+-- map({ "i", "s" }, "<C-j>", function()
+--   if ls.jumpable(-1) then
+--     return ls.jump(-1)
+--   else
+--     return "<C-j>"
+--   end
+-- end, { silent = true })
+-- map({ "i", "s" }, "<C-e>", function()
+--   if ls.choice_active() then
+--     return ls.change_choice(1)
+--   else
+--     return "<C-e>"
+--   end
+-- end, { silent = true })
 
 -- fzf
 local fzf = require "fzf-lua"
--- wk.add {
---   { "<leader>s", group = "search/swap" },
---   { "<leader>d", group = "document" },
---   { "<leader>w", group = "workspace" },
--- }
 map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
 map("n", "<leader>s", fzf.lsp_document_symbols, { desc = "document_symbols" })
 map("n", "<leader>S", fzf.lsp_live_workspace_symbols, { desc = "workspace_symbols" })
-map("n", "<leader>d", fzf.diagnostics_document, { desc = "diag_document" })
-map("n", "<leader>D", fzf.diagnostics_workspace, { desc = "diag_workspace" })
+map("n", "<leader>D", function()
+  fzf.diagnostics_document {
+    winopts = {
+      preview = {
+        layout = "vertical",
+      },
+    },
+  }
+end, { desc = "fzf diag doc" })
+map("n", "<leader>Q", function()
+  fzf.diagnostics_workspace {
+    winopts = {
+      preview = {
+        layout = "vertical",
+      },
+    },
+  }
+end, { desc = "fzf diag wspc" })
+map("n", "<leader>d", vim.diagnostic.setloclist, { desc = "loclist diag doc" })
+map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "qflist diag wspc" })
 map("n", "<leader>r", fzf.lsp_references, { desc = "lsp_references" })
 map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
 map("n", "<leader>f", fzf.files, { desc = "files" })
@@ -132,7 +146,7 @@ map("n", "grf", function()
   }
 end, { desc = "format" })
 map("n", "grh", vim.lsp.buf.typehierarchy, { desc = "typehierarchy" })
-map("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic" })
+-- map("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic" })
 map("n", "grFa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
 map("n", "grFr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
 map("n", "grFl", function()
