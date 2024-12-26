@@ -20,29 +20,21 @@ return {
         auto_show = true,
         auto_show_delay_ms = 500,
       },
+      accept = {
+        auto_brackets = {
+          enabled = false,
+        },
+      },
     },
     signature = {
       enabled = true
     },
     snippets = {
-      -- expand = function(snippet)
-      --   require("luasnip").lsp_expand(snippet)
-      -- end,
-      -- active = function(filter)
-      --   if filter and filter.direction then
-      --     return require("luasnip").jumpable(filter.direction)
-      --   end
-      --   return require("luasnip").in_snippet()
-      -- end,
-      -- jump = function(direction)
-      --   require("luasnip").jump(direction)
-      -- end,
       expand = function(snippet) vim.snippet.expand(snippet) end,
       active = function(filter) return vim.snippet.active(filter) end,
       jump = function(direction) vim.snippet.jump(direction) end,
     },
     sources = {
-      -- default = { "lsp", "path", "luasnip", "buffer" },
       default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
   },

@@ -108,21 +108,13 @@ return {
               parameterNames = true,
               rangeVariableTypes = true,
             },
-            analyses = {
-              fieldalignment = true,
-              httpmux = true,
-              httpresponse = true,
-              reflecvaluecompare = true,
-              shadow = true,
-              sigchanyzer = true,
-              unusedvariable = true,
-              useany = true,
-            },
+            staticcheck = false,
           },
         },
       },
     }
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.dynamicRegistration = true
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
     -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
