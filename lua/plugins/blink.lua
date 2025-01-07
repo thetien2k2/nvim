@@ -10,6 +10,8 @@ return {
       ["<S-Tab>"] = {},
       ["<C-l>"] = { "snippet_forward", "fallback" },
       ["<C-j>"] = { "snippet_backward", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
@@ -25,9 +27,6 @@ return {
           enabled = false,
         },
       },
-    },
-    signature = {
-      enabled = true
     },
     snippets = {
       expand = function(snippet) vim.snippet.expand(snippet) end,
