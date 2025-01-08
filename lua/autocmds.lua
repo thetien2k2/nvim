@@ -18,40 +18,6 @@ autocmd("TextYankPost", {
   end,
 })
 
--- lsp autocommands
--- autocmd("LspAttach", {
---   callback = function(args)
---     local client = vim.lsp.get_client_by_id(args.data.client_id)
---     if client.supports_method "textDocument/formatting" then
---       vim.api.nvim_create_autocmd("BufWritePre", {
---         buffer = args.buf,
---         callback = function()
---           vim.lsp.buf.format {
---             filter = function()
---               local file_type = vim.api.nvim_buf_get_option(args.buf, "filetype")
---               local efm_format = false
---               local ft_efm = { "go", "html", "css", "js", "ts", "makrdown" }
---               if client.name == "emf" then
---                 for i = 1, #ft_efm do
---                   if file_type == ft_efm[i] then
---                     efm_format = true
---                     break
---                   end
---                 end
---                 return efm_format
---               end
---               return true
---             end,
---             bufnr = args.buf,
---             async = false,
---             timeout_ms = 10000,
---           }
---         end,
---       })
---     end
---   end,
--- })
-
 autocmd("BufWritePre", {
   callback = function(ev)
     -- print(string.format('event fired: %s', vim.inspect(ev)))

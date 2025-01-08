@@ -1,7 +1,6 @@
 return {
   "saghen/blink.cmp",
   version = "*",
-  enabled = true,
   event = "VeryLazy",
   opts = {
     keymap = {
@@ -35,6 +34,7 @@ return {
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+      cmdline = {},
     },
   },
   opts_extend = { "sources.default" },

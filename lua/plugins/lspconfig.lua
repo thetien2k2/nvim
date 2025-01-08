@@ -71,14 +71,11 @@ return {
         cmd = { "efm-langserver", "-q", "-c", "/home/tiennguyen/.config/efm-langserver/config.yaml" },
         init_options = {
           documentFormatting = true,
-          documentRangeFormatting = true,
-          codeAction = true,
+          -- documentRangeFormatting = true,
+          -- codeAction = true,
           -- hover = true,
           -- documentSymbol = true,
           -- completion = true,
-        },
-        settings = {
-          filetypes = { "go" },
         },
       },
       gopls = {

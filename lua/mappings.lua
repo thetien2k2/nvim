@@ -78,44 +78,66 @@ map(
 -- end, { silent = true })
 
 -- fzf
-local fzf = require "fzf-lua"
-map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
-map("n", "<leader>s", fzf.lsp_document_symbols, { desc = "document_symbols" })
-map("n", "<leader>S", fzf.lsp_live_workspace_symbols, { desc = "workspace_symbols" })
-map("n", "<leader>D", function()
-  fzf.diagnostics_document {
-    winopts = {
-      preview = {
-        layout = "vertical",
-      },
-    },
-  }
-end, { desc = "fzf diag doc" })
-map("n", "<leader>Q", function()
-  fzf.diagnostics_workspace {
-    winopts = {
-      preview = {
-        layout = "vertical",
-      },
-    },
-  }
-end, { desc = "fzf diag wspc" })
+-- local fzf = require "fzf-lua"
+-- map("n", "<leader><leader>", fzf.buffers, { desc = "buffers" })
+-- map("n", "<leader>s", fzf.lsp_document_symbols, { desc = "document_symbols" })
+-- map("n", "<leader>S", fzf.lsp_live_workspace_symbols, { desc = "workspace_symbols" })
+-- map("n", "<leader>D", function()
+--   fzf.diagnostics_document {
+--     winopts = {
+--       preview = {
+--         layout = "vertical",
+--       },
+--     },
+--   }
+-- end, { desc = "fzf diag doc" })
+-- map("n", "<leader>Q", function()
+--   fzf.diagnostics_workspace {
+--     winopts = {
+--       preview = {
+--         layout = "vertical",
+--       },
+--     },
+--   }
+-- end, { desc = "fzf diag wspc" })
+-- map("n", "<leader>r", fzf.lsp_references, { desc = "lsp_references" })
+-- map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
+-- map("n", "<leader>f", fzf.files, { desc = "files" })
+-- map("n", "<leader>g", fzf.grep, { desc = "grep" })
+-- map("v", "<leader>g", fzf.grep_visual, { desc = "grep_visual" })
+-- map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
+-- map("n", "<leader>j", fzf.jumps, { desc = "jumps" })
+-- map("n", "<leader>m", fzf.marks, { desc = "marks" })
+-- map("n", "<leader>.", fzf.resume, { desc = "resume last comamnd/query" })
+-- map("n", "<leader>k", fzf.live_grep_resume, { desc = "live_grep_resume" })
+-- map("n", "<leader>T", fzf.treesitter, { desc = "treesitter" })
+-- map("n", "<leader>w", fzf.grep_cword, { desc = "grep_cword" })
+-- map("n", "<leader>W", fzf.grep_cWORD, { desc = "grep_cWORD" })
+-- map("n", "<leader>H", fzf.help_tags, { desc = "help_tags" })
+
 map("n", "<leader>d", vim.diagnostic.setloclist, { desc = "loclist diag doc" })
 map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "qflist diag wspc" })
-map("n", "<leader>r", fzf.lsp_references, { desc = "lsp_references" })
-map("n", "<leader>b", fzf.builtin, { desc = "fzf.builtin" })
-map("n", "<leader>f", fzf.files, { desc = "files" })
-map("n", "<leader>g", fzf.grep, { desc = "grep" })
-map("v", "<leader>g", fzf.grep_visual, { desc = "grep_visual" })
-map("n", "<leader>l", fzf.live_grep, { desc = "live_grep" })
-map("n", "<leader>j", fzf.jumps, { desc = "jumps" })
-map("n", "<leader>m", fzf.marks, { desc = "marks" })
-map("n", "<leader>.", fzf.resume, { desc = "resume last comamnd/query" })
-map("n", "<leader>k", fzf.live_grep_resume, { desc = "live_grep_resume" })
-map("n", "<leader>T", fzf.treesitter, { desc = "treesitter" })
-map("n", "<leader>w", fzf.grep_cword, { desc = "grep_cword" })
-map("n", "<leader>W", fzf.grep_cWORD, { desc = "grep_cWORD" })
-map("n", "<leader>H", fzf.help_tags, { desc = "help_tags" })
+
+local tb = require "telescope.builtin"
+map("n", "<leader><leader>", tb.buffers, { desc = "buffers" })
+map("n", "<leader>s", tb.lsp_document_symbols, { desc = "document_symbols" })
+map("n", "<leader>S", tb.lsp_dynamic_workspace_symbols, { desc = "workspace_symbols" })
+map("n", "<leader>D", function()
+  tb.diagnostics { bufnr=0 }
+end, {desc = "tele doc diag"})
+map("n", "<leader>Q", tb.diagnostics, {desc = "tele wpsc diag"})
+map("n", "<leader>r", tb.lsp_references, { desc = "lsp_references" })
+map("n", "<leader>b", tb.builtin, { desc = "telescope builtin" })
+map("n", "<leader>f", tb.find_files, { desc = "files" })
+map({"n", "v"}, "<leader>g", tb.grep_string, { desc = "grep string/selection" })
+map("n", "<leader>l", tb.live_grep, { desc = "live_grep" })
+map("n", "<leader>j", tb.jumplist, { desc = "jumps" })
+map("n", "<leader>m", tb.marks, { desc = "marks" })
+map("n", "<leader>.", tb.resume, { desc = "resume last comamnd/query" })
+map("n", "<leader>k", tb.commands, { desc = "commands" })
+map("n", "<leader>T", tb.treesitter, { desc = "treesitter" })
+map("n", "<leader>H", tb.help_tags, { desc = "help_tags" })
+
 wk.add {
   { "<leader>t", group = "toggle" },
 }

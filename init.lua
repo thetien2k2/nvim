@@ -58,5 +58,5 @@ require("lazy").setup("plugins", {
 
 vim.cmd { cmd = "colorscheme", args = { cscheme } }
 require "setup"
-require "mappings"
 require "autocmds"
+require "mappings"
