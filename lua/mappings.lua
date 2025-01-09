@@ -115,28 +115,36 @@ map(
 -- map("n", "<leader>W", fzf.grep_cWORD, { desc = "grep_cWORD" })
 -- map("n", "<leader>H", fzf.help_tags, { desc = "help_tags" })
 
-map("n", "<leader>d", vim.diagnostic.setloclist, { desc = "loclist diag doc" })
-map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "qflist diag wspc" })
 
 local tb = require "telescope.builtin"
-map("n", "<leader><leader>", tb.buffers, { desc = "buffers" })
-map("n", "<leader>s", tb.lsp_document_symbols, { desc = "document_symbols" })
-map("n", "<leader>S", tb.lsp_dynamic_workspace_symbols, { desc = "workspace_symbols" })
-map("n", "<leader>D", function()
-  tb.diagnostics { bufnr=0 }
-end, {desc = "tele doc diag"})
-map("n", "<leader>Q", tb.diagnostics, {desc = "tele wpsc diag"})
-map("n", "<leader>r", tb.lsp_references, { desc = "lsp_references" })
-map("n", "<leader>b", tb.builtin, { desc = "telescope builtin" })
 map("n", "<leader>f", tb.find_files, { desc = "files" })
-map({"n", "v"}, "<leader>g", tb.grep_string, { desc = "grep string/selection" })
-map("n", "<leader>l", tb.live_grep, { desc = "live_grep" })
-map("n", "<leader>j", tb.jumplist, { desc = "jumps" })
-map("n", "<leader>m", tb.marks, { desc = "marks" })
-map("n", "<leader>.", tb.resume, { desc = "resume last comamnd/query" })
+map({ "n", "v" }, "<leader>g", tb.grep_string, { desc = "grep string/selection" })
+map("n", "<leader>l", tb.live_grep, { desc = "live grep" })
+
+map("n", "<leader><leader>", tb.buffers, { desc = "buffers" })
 map("n", "<leader>k", tb.commands, { desc = "commands" })
+map("n", "<leader>H", tb.help_tags, { desc = "help tags" })
+map("n", "<leader>m", tb.marks, { desc = "marks" })
+map("n", "<leader>j", tb.jumplist, { desc = "jumps" })
+map("n", "<leader>/", tb.current_buffer_fuzzy_find, { desc = "fuzzy current buf" })
+map("n", "<leader>.", tb.resume, { desc = "resume last picker" })
+
+map("n", "<leader>r", tb.lsp_references, { desc = "references" })
+map("n", "<leader>i", tb.lsp_incoming_calls, { desc = "incoming calls" })
+map("n", "<leader>o", tb.lsp_outgoing_calls, { desc = "outgoing calls" })
+map("n", "<leader>s", tb.lsp_document_symbols, { desc = "doc symbols" })
+map("n", "<leader>S", tb.lsp_dynamic_workspace_symbols, { desc = "wp symbols" })
+map("n", "<leader>D", function()
+  tb.diagnostics { bufnr = 0 }
+end, { desc = "tele doc diag" })
+map("n", "<leader>Q", tb.diagnostics, { desc = "tele wp diag" })
+
+map("n", "<leader>c", tb.git_bcommits, { desc = "buffer's commits" })
+map("n", "<leader>C", tb.git_bcommits, { desc = "commits" })
+
 map("n", "<leader>T", tb.treesitter, { desc = "treesitter" })
-map("n", "<leader>H", tb.help_tags, { desc = "help_tags" })
+
+map("n", "<leader>b", tb.builtin, { desc = "telescope builtin" })
 
 wk.add {
   { "<leader>t", group = "toggle" },
@@ -174,6 +182,8 @@ map("n", "grFr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace
 map("n", "grFl", function()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "list_workspace_folders" })
+map("n", "<leader>d", vim.diagnostic.setloclist, { desc = "loclist diag doc" })
+map("n", "<leader>q", vim.diagnostic.setqflist, { desc = "qflist diag wspc" })
 
 -- gitsigns
 local gitsigns = require "gitsigns"
