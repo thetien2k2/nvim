@@ -77,6 +77,9 @@ return {
           -- documentSymbol = true,
           -- completion = true,
         },
+        settings = {
+          filetypes = "*",
+        },
       },
       gopls = {
         settings = {
@@ -123,3 +126,4 @@ return {
     end
   end,
 }
+
