@@ -60,6 +60,7 @@ return {
         filetypes = { "html", "templ", "gotmpl" },
       },
       cssls = {},
+      jsonls = {},
       ts_ls = {
         settings = {
           ts_ls = {
@@ -67,25 +68,12 @@ return {
           },
         },
       },
-      efm = {
-        cmd = { "efm-langserver", "-q", "-c", "/home/tiennguyen/.config/efm-langserver/config.yaml" },
-        init_options = {
-          documentFormatting = true,
-          -- documentRangeFormatting = true,
-          -- codeAction = true,
-          -- hover = true,
-          -- documentSymbol = true,
-          -- completion = true,
-        },
-        settings = {
-          filetypes = "*",
-        },
-      },
       gopls = {
         settings = {
           gopls = {
             semanticTokens = true,
             gofumpt = true,
+            staticcheck = false,
             usePlaceholders = true,
             completeUnimported = true,
             directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
@@ -108,7 +96,6 @@ return {
               parameterNames = true,
               rangeVariableTypes = true,
             },
-            staticcheck = false,
           },
         },
       },
@@ -126,4 +113,3 @@ return {
     end
   end,
 }
-

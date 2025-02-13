@@ -25,17 +25,17 @@ autocmd("BufWritePre", {
     local ft = vim.api.nvim_get_option_value("filetype", {})
     local formatters = {
       ["lua"] = "lua_ls",
-      ["go"] = "efm",
-      ["gotmp"] = "efm",
-      ["gomod"] = "efm",
-      ["gowork"] = "efm",
-      ["html"] = "efm",
-      ["css"] = "efm",
-      ["json"] = "efm",
-      ["js"] = "efm",
-      ["ts"] = "efm",
-      ["markdown"] = "efm",
-      ["yaml"] = "efm",
+      ["go"] = "null-ls",
+      ["gotmp"] = "gopls",
+      ["gomod"] = "gopls",
+      ["gowork"] = "gopls",
+      ["html"] = "null-ls",
+      ["css"] = "null-ls",
+      ["json"] = "null-ls",
+      ["js"] = "null-ls",
+      ["ts"] = "null-ls",
+      ["markdown"] = "null-ls",
+      ["yaml"] = "null-ls",
     }
     if #clients == 0 then
       vim.notify("unable to format: no lsp attached", vim.log.levels.WARN)
