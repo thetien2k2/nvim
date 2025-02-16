@@ -17,6 +17,7 @@ local cscheme = "tokyonight-moon"
 require("lazy").setup("plugins", {
   defaults = {
     lazy = false,
+    version = "*",
   },
   install = {
     colorscheme = { cscheme },
