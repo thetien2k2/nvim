@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
 require "options"
@@ -16,8 +15,10 @@ vim.opt.rtp:prepend(lazypath)
 local cscheme = "tokyonight-moon"
 require("lazy").setup("plugins", {
   defaults = {
-    lazy = false,
-    version = nil,
+    -- version = "*",
+  },
+  rocks = {
+    enabled = false,
   },
   install = {
     colorscheme = { cscheme },
@@ -61,8 +62,3 @@ vim.cmd { cmd = "colorscheme", args = { cscheme } }
 require "setup"
 require "autocmds"
 require "mappings"
-
-if vim.g.neovide then
-  vim.g.neovide_hide_mouse_when_typing = true
-  vim.g.neovide_cursor_vfx_mode = "ripple"
-end

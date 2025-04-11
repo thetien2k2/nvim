@@ -1,0 +1,77 @@
+version: 2
+log-file: /home/tiennguyen/.cache/efm.log
+log-level: 2
+root-markers:
+  - .git/
+  - go.mod
+  - go.work
+
+tools:
+  golangci-lint: &golangci-lint
+    lint-command: "golangci-lint run"
+    lint-stdin: false
+    lint-workspace: true
+    lint-severity: 2
+    lint-ignore-exit-code: true
+    lint-source: "golangci"
+  staticcheck: &staticcheck
+    lint-command: "staticcheck -checks all"
+    lint-stdin: false
+    lint-workspace: true
+    lint-severity: 2
+    lint-ignore-exit-code: true
+    lint-source: "staticcheck"
+  gofumpt: &gofumpt
+    format-command: "gofumpt"
+    format-stdin: true
+  goimports: &goimports
+    format-command: "goimports"
+    format-stdin: true
+  prettier: &prettier
+    format-command: "prettier --stdin-filepath ${INPUT}"
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+      - .prettierrc.js
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettierrc.json5
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.toml
+      - prettier.config.js
+      - prettier.config.cjs
+      - prettier.config.mjs
+
+languages:
+  go:
+    # - <<: *staticcheck
+    - <<: *golangci-lint
+    - <<: *gofumpt
+    - <<: *goimports
+  gotmpl:
+    # - <<: *staticcheck
+    - <<: *golangci-lint
+    - <<: *gofumpt
+    - <<: *goimports
+  gomod:
+    - <<: *gofumpt
+  gowork:
+    - <<: *gofumpt
+  html:
+    - <<: *prettier
+  css:
+    - <<: *prettier
+  json:
+    - <<: *prettier
+  js:
+    - <<: *prettier
+  jsx:
+    - <<: *prettier
+  ts:
+    - <<: *prettier
+  markdown:
+    - <<: *prettier
+  yaml:
+    - <<: *prettier

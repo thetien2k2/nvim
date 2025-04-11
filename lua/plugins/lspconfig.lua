@@ -68,6 +68,17 @@ return {
           },
         },
       },
+      efm = {
+        cmd = { "efm-langserver", "-q", "-c", "/home/tiennguyen/.config/nvim/efm-config.yaml" },
+        init_options = {
+          documentFormatting = true,
+          documentRangeFormatting = true,
+          -- codeAction = true,
+          -- hover = true,
+          -- documentSymbol = true,
+          -- completion = true,
+        },
+      },
       gopls = {
         settings = {
           gopls = {
@@ -99,6 +110,7 @@ return {
           },
         },
       },
+
     }
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.dynamicRegistration = true
