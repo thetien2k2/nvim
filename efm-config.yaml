@@ -8,30 +8,21 @@ root-markers:
 
 tools:
   golangci-lint: &golangci-lint
-    lint-command: "golangci-lint run --output.json.path stdout --show-stats false"
+    lint-command: "golangci-lint run --show-stats=false --output.text.print-issued-lines=false --output.text.path=stdout --output.text.colors=false"
+    lint-formats:
+      - "%f:%l:%c: %m"
     lint-stdin: false
     lint-workspace: true
     lint-severity: 2
-    lint-ignore-exit-code: true
+    lint-ignore-exit-code: false
     lint-source: "golangci"
   golangci-fmt: &golangci-fmt
-    format-command: "golangci-lint fmt --stdin --color 'never'"
+    format-command: "golangci-lint fmt --stdin --color='never'"
     format-stdin: true
-  # staticcheck: &staticcheck
-  #   lint-command: "staticcheck -checks all"
-  #   lint-stdin: false
-  #   lint-workspace: true
-  #   lint-severity: 2
-  #   lint-ignore-exit-code: true
-  #   lint-source: "staticcheck"
-  # gofumpt: &gofumpt
-  #   format-command: "gofumpt"
-  #   format-stdin: true
-  # goimports: &goimports
-  #   format-command: "goimports"
-  #   format-stdin: true
-  prettier: &prettier
-    format-command: "prettier --stdin-filepath ${INPUT}"
+  prettierd: &prettierd
+    format-command: >
+      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
+        ${--tab-width=tabSize}
     format-stdin: true
     root-markers:
       - .prettierrc
@@ -43,9 +34,6 @@ tools:
       - .prettierrc.mjs
       - .prettierrc.cjs
       - .prettierrc.toml
-      - prettier.config.js
-      - prettier.config.cjs
-      - prettier.config.mjs
 
 languages:
   go:
@@ -59,18 +47,18 @@ languages:
   gowork:
     - <<: *golangci-fmt
   html:
-    - <<: *prettier
+    - <<: *prettierd
   css:
-    - <<: *prettier
+    - <<: *prettierd
   json:
-    - <<: *prettier
+    - <<: *prettierd
   js:
-    - <<: *prettier
+    - <<: *prettierd
   jsx:
-    - <<: *prettier
+    - <<: *prettierd
   ts:
-    - <<: *prettier
+    - <<: *prettierd
   markdown:
-    - <<: *prettier
+    - <<: *prettierd
   yaml:
-    - <<: *prettier
+    - <<: *prettierd
