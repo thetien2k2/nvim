@@ -8,25 +8,28 @@ root-markers:
 
 tools:
   golangci-lint: &golangci-lint
-    lint-command: "golangci-lint run"
+    lint-command: "golangci-lint run --output.json.path stdout --show-stats false"
     lint-stdin: false
     lint-workspace: true
     lint-severity: 2
     lint-ignore-exit-code: true
     lint-source: "golangci"
-  staticcheck: &staticcheck
-    lint-command: "staticcheck -checks all"
-    lint-stdin: false
-    lint-workspace: true
-    lint-severity: 2
-    lint-ignore-exit-code: true
-    lint-source: "staticcheck"
-  gofumpt: &gofumpt
-    format-command: "gofumpt"
+  golangci-fmt: &golangci-fmt
+    format-command: "golangci-lint fmt --stdin --color 'never'"
     format-stdin: true
-  goimports: &goimports
-    format-command: "goimports"
-    format-stdin: true
+  # staticcheck: &staticcheck
+  #   lint-command: "staticcheck -checks all"
+  #   lint-stdin: false
+  #   lint-workspace: true
+  #   lint-severity: 2
+  #   lint-ignore-exit-code: true
+  #   lint-source: "staticcheck"
+  # gofumpt: &gofumpt
+  #   format-command: "gofumpt"
+  #   format-stdin: true
+  # goimports: &goimports
+  #   format-command: "goimports"
+  #   format-stdin: true
   prettier: &prettier
     format-command: "prettier --stdin-filepath ${INPUT}"
     format-stdin: true
@@ -46,19 +49,15 @@ tools:
 
 languages:
   go:
-    # - <<: *staticcheck
     - <<: *golangci-lint
-    - <<: *gofumpt
-    - <<: *goimports
+    - <<: *golangci-fmt
   gotmpl:
-    # - <<: *staticcheck
     - <<: *golangci-lint
-    - <<: *gofumpt
-    - <<: *goimports
+    - <<: *golangci-fmt
   gomod:
-    - <<: *gofumpt
+    - <<: *golangci-fmt
   gowork:
-    - <<: *gofumpt
+    - <<: *golangci-fmt
   html:
     - <<: *prettier
   css:

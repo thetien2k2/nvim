@@ -70,10 +70,11 @@ return {
       },
       efm = {
         cmd = { "efm-langserver", "-q", "-c", "/home/tiennguyen/.config/nvim/efm-config.yaml" },
+        filetypes = { "go", "gotmpl", "gomod", "gowork", "html", "css", "js", "json", "jsx", "ts", "yaml" },
         init_options = {
           documentFormatting = true,
           documentRangeFormatting = true,
-          -- codeAction = true,
+          codeAction = true,
           -- hover = true,
           -- documentSymbol = true,
           -- completion = true,
