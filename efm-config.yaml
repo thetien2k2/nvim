@@ -17,23 +17,11 @@ tools:
     lint-ignore-exit-code: false
     lint-source: "golangci"
   golangci-fmt: &golangci-fmt
-    format-command: "golangci-lint fmt --stdin --color='never'"
+    format-command: "golangci-lint fmt --stdin --color='never' --enable='gofumpt,goimports'"
     format-stdin: true
-  prettierd: &prettierd
-    format-command: >
-      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
-        ${--tab-width=tabSize}
+  prettier: &prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${INPUT}"
     format-stdin: true
-    root-markers:
-      - .prettierrc
-      - .prettierrc.json
-      - .prettierrc.js
-      - .prettierrc.yml
-      - .prettierrc.yaml
-      - .prettierrc.json5
-      - .prettierrc.mjs
-      - .prettierrc.cjs
-      - .prettierrc.toml
 
 languages:
   go:
@@ -47,18 +35,18 @@ languages:
   gowork:
     - <<: *golangci-fmt
   html:
-    - <<: *prettierd
+    - <<: *prettier
   css:
-    - <<: *prettierd
+    - <<: *prettier
   json:
-    - <<: *prettierd
+    - <<: *prettier
   js:
-    - <<: *prettierd
+    - <<: *prettier
   jsx:
-    - <<: *prettierd
+    - <<: *prettier
   ts:
-    - <<: *prettierd
+    - <<: *prettier
   markdown:
-    - <<: *prettierd
+    - <<: *prettier
   yaml:
-    - <<: *prettierd
+    - <<: *prettier
