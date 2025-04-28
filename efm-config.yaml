@@ -46,7 +46,5 @@ languages:
     - <<: *prettier
   ts:
     - <<: *prettier
-  markdown:
-    - <<: *prettier
   yaml:
     - <<: *prettier
