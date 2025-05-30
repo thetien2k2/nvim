@@ -19,8 +19,8 @@ tools:
   golangci-fmt: &golangci-fmt
     format-command: "golangci-lint fmt --stdin --color='never' --enable='gofumpt,goimports'"
     format-stdin: true
-  prettier: &prettier
-    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${INPUT}"
+  prettierd: &prettierd
+    format-command: "prettierd ${INPUT}"
     format-stdin: true
 
 languages:
@@ -35,16 +35,16 @@ languages:
   gowork:
     - <<: *golangci-fmt
   html:
-    - <<: *prettier
+    - <<: *prettierd
   css:
-    - <<: *prettier
-  json:
-    - <<: *prettier
+    - <<: *prettierd
   js:
-    - <<: *prettier
+    - <<: *prettierd
+  json:
+    - <<: *prettierd
   jsx:
-    - <<: *prettier
+    - <<: *prettierd
   ts:
-    - <<: *prettier
+    - <<: *prettierd
   yaml:
-    - <<: *prettier
+    - <<: *prettierd
