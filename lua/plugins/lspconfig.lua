@@ -56,10 +56,11 @@ return {
           },
         },
       },
+      cssls = {},
+      eslint = {},
       html = {
         filetypes = { "html", "templ", "gotmpl" },
       },
-      cssls = {},
       jsonls = {},
       ts_ls = {
         settings = {
