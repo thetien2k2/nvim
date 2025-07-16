@@ -14,13 +14,28 @@ tools:
     lint-stdin: false
     lint-workspace: true
     lint-severity: 2
-    lint-ignore-exit-code: false
+    lint-ignore-exit-code: true
     lint-source: "golangci"
   golangci-fmt: &golangci-fmt
-    format-command: "golangci-lint fmt --stdin --color='never' --enable='gofumpt,goimports'"
+    format-command: "golangci-lint fmt --stdin --color='never' --enable='goimports,gofumpt'"
     format-stdin: true
-  prettierd: &prettierd
-    format-command: "prettierd ${INPUT}"
+  css-prettier: &css-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css"
+    format-stdin: true
+  html-prettier: &html-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html"
+    format-stdin: true
+  json-prettier: &json-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser json"
+    format-stdin: true
+  js-prettier: &js-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser meriyah"
+    format-stdin: true
+  ts-prettier: &ts-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser typescript"
+    format-stdin: true
+  yaml-prettier: &yaml-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser yaml"
     format-stdin: true
 
 languages:
@@ -34,17 +49,17 @@ languages:
     - <<: *golangci-fmt
   gowork:
     - <<: *golangci-fmt
-  html:
-    - <<: *prettierd
-  css:
-    - <<: *prettierd
-  js:
-    - <<: *prettierd
-  json:
-    - <<: *prettierd
-  jsx:
-    - <<: *prettierd
-  ts:
-    - <<: *prettierd
   yaml:
-    - <<: *prettierd
+    - <<: *yaml-prettier
+  html:
+    - <<: *html-prettier
+  css:
+    - <<: *css-prettier
+  json:
+    - <<: *json-prettier
+  javascript:
+    - <<: *js-prettier
+  typescript:
+    - <<: *ts-prettier
+  # jsx:
+  #   - <<: *prettier

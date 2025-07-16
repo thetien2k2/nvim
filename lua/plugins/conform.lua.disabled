@@ -1,0 +1,23 @@
+return {
+  "stevearc/conform.nvim",
+  event = "VeryLazy",
+  opts = {
+    format_on_save = {
+      timeout_ms = 5000,
+      lsp_format = "fallback",
+    },
+    formatters_by_ft = {
+      go = { "goimports", "gofumpt" },
+      gotmpl = { "goimports", "gofumpt" },
+      gomod = { "goimports", "gofumpt" },
+      gowork = { "goimports", "gofumpt" },
+      html = { "prettierd", "prettier", stop_after_first = true },
+      css = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { "prettierd", "prettier", stop_after_first = true },
+      json = { "prettierd", "prettier", stop_after_first = true },
+      jsx = { "prettierd", "prettier", stop_after_first = true },
+      ts = { "prettierd", "prettier", stop_after_first = true },
+      yaml = { "prettierd", "prettier", stop_after_first = true },
+    },
+  },
+}

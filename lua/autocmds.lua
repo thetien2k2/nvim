@@ -19,6 +19,8 @@ autocmd("TextYankPost", {
 })
 
 autocmd("BufWritePre", {
+  -- lsp format
+  pattern = "*",
   callback = function(ev)
     -- print(string.format('event fired: %s', vim.inspect(ev)))
     local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -32,9 +34,8 @@ autocmd("BufWritePre", {
       ["html"] = "efm",
       ["css"] = "efm",
       ["json"] = "efm",
-      ["js"] = "efm",
-      ["ts"] = "efm",
-      ["markdown"] = "efm",
+      ["javascript"] = "efm",
+      ["typescript"] = "efm",
       ["yaml"] = "efm",
     }
     if #clients == 0 then
@@ -52,4 +53,21 @@ autocmd("BufWritePre", {
       }
     end
   end
+
+  -- conform format
+  -- callback = function(args)
+  --   require("conform").format({ async = false, lsp_format = "fallback", bufnr = args.buf })
+  -- end,
 })
+
+-- vim.api.nvim_create_user_command("Format", function(args)
+--   local range = nil
+--   if args.count ~= -1 then
+--     local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+--     range = {
+--       start = { args.line1, 0 },
+--       ["end"] = { args.line2, end_line:len() },
+--     }
+--   end
+--   require("conform").format({ async = false, lsp_format = "fallback", range = range })
+-- end, { range = true })
