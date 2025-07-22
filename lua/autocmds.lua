@@ -10,13 +10,25 @@ autocmd({ "BufEnter", "BufNewFile", "BufFilePost" }, {
   end,
 })
 
-autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+autocmd("FileType", {
+  pattern = { 'go', 'gomod',
+    'markdown',
+    'html', 'css', 'javascript', 'json'
+  },
   callback = function()
-    vim.highlight.on_yank()
+    vim.treesitter.start()
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+
+-- autocmd("TextYankPost", {
+--   desc = "Highlight when yanking (copying) text",
+--   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 autocmd("BufWritePre", {
   -- lsp format

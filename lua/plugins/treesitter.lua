@@ -1,83 +1,86 @@
 ---@diagnostic disable: undefined-global
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = "VeryLazy",
-  cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  lazy = false,
+  branch = "main",
   build = ":TSUpdate",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
-  opts = function()
-    pcall(function()
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
-    end)
-
-    local options = {
-      ensure_installed = {
-        "lua",
-        "luadoc",
-        "printf",
-        "vim",
-        "vimdoc",
-        "go",
-        "gomod",
-        "gosum",
-        "gotmpl",
-        "gowork",
-        "templ",
-        "typescript",
-        "javascript",
-        "json",
-        "css",
-        "html",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "gnn", -- set to `false` to disable one of the mappings
-          node_incremental = "gnf",
-          scope_incremental = "gns",
-          node_decremental = "gnd",
-        },
-        disable = function()
-          local buf = vim.api.nvim_get_current_buf()
-          local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-          if byte_size > 2 * 1024 * 1024 then
-            return true
-          end
-          return false
-        end,
-      },
-      highlight = {
-        enable = true,
-        use_languagetree = true,
-        additional_vim_regex_highlighting = false,
-        disable = function()
-          local buf = vim.api.nvim_get_current_buf()
-          local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-          if byte_size > 2 * 1024 * 1024 then
-            return true
-          end
-          return false
-        end,
-      },
-      indent = {
-        enable = true,
-        disable = function()
-          local buf = vim.api.nvim_get_current_buf()
-          local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-          if byte_size > 2 * 1024 * 1024 then
-            return true
-          end
-          return false
-        end,
-      },
-    }
-
-    return options
-  end,
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-  end,
+  -- event = "VeryLazy",
+  -- cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  -- dependencies = {
+  --   "nvim-treesitter/nvim-treesitter-textobjects",
+  -- },
+  -- opts = function()
+  --   -- pcall(function()
+  --   --   dofile(vim.g.base46_cache .. "syntax")
+  --   --   dofile(vim.g.base46_cache .. "treesitter")
+  --   -- end)
+  --
+  --   local options = {
+  --     ensure_installed = {
+  --       "lua",
+  --       "luadoc",
+  --       -- "printf",
+  --       "vim",
+  --       "vimdoc",
+  --       "go",
+  --       "gomod",
+  --       "gosum",
+  --       "gotmpl",
+  --       "gowork",
+  --       -- "templ",
+  --       "typescript",
+  --       "javascript",
+  --       "json",
+  --       "css",
+  --       "html",
+  --     },
+  --     auto_install = true,
+  --     incremental_selection = {
+  --       enable = true,
+  --       keymaps = {
+  --         init_selection = "gnn", -- set to `false` to disable one of the mappings
+  --         node_incremental = "gnf",
+  --         scope_incremental = "gns",
+  --         node_decremental = "gnd",
+  --       },
+  --       disable = function()
+  --         local buf = vim.api.nvim_get_current_buf()
+  --         local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+  --         if byte_size > 2 * 1024 * 1024 then
+  --           return true
+  --         end
+  --         return false
+  --       end,
+  --     },
+  --     highlight = {
+  --       enable = true,
+  --       use_languagetree = true,
+  --       additional_vim_regex_highlighting = false,
+  --       disable = function()
+  --         local buf = vim.api.nvim_get_current_buf()
+  --         local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+  --         if byte_size > 2 * 1024 * 1024 then
+  --           return true
+  --         end
+  --         return false
+  --       end,
+  --     },
+  --     indent = {
+  --       enable = true,
+  --       disable = function()
+  --         local buf = vim.api.nvim_get_current_buf()
+  --         local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+  --         if byte_size > 2 * 1024 * 1024 then
+  --           return true
+  --         end
+  --         return false
+  --       end,
+  --     },
+  --   }
+  --
+  --   return options
+  -- end,
+  -- config = function(_, opts)
+  --   require("nvim-treesitter.configs").setup(opts)
+  -- end,
 }

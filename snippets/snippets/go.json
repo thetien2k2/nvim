@@ -129,6 +129,11 @@
     "body": "if err != nil {\n\tfmt.Println(${1:err})\n}",
     "description": ""
   },
+  "if err != nil fmte": {
+    "prefix": "iefe",
+    "body": "if err != nil {\n\tfmt.Errorf(\"${1:Error: %w\\n}\",${2:err})\n}",
+    "description": ""
+  },
   "if err != nil fmtf": {
     "prefix": "ieff",
     "body": "if err != nil {\n\tfmt.Printf(\"${1:Error: %v\\n}\",${2:err})\n}",

@@ -16,6 +16,7 @@ local cscheme = "tokyonight-moon"
 require("lazy").setup("plugins", {
   defaults = {
     -- version = "*",
+    version = false,
   },
   rocks = {
     enabled = false,

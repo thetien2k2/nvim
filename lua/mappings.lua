@@ -224,3 +224,78 @@ map("n", "<leader>hD", function()
 end, { desc = "Diff against last commit" })
 map("n", "<leader>ht", gitsigns.toggle_current_line_blame, { desc = "toggle_current_line_blame" })
 map("n", "<leader>hT", gitsigns.toggle_deleted, { desc = "toggle_deleted" })
+
+-- nvim-treesitter-textobjects
+-- configuration
+require("nvim-treesitter-textobjects").setup {
+  move = {
+    -- whether to set jumps in the jumplist
+    set_jumps = true,
+  },
+}
+-- keymaps
+-- You can use the capture groups defined in `textobjects.scm`
+map({ "x", "o" }, "af", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+end, { desc = "function" })
+map({ "x", "o" }, "if", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+end, { desc = "function" })
+map({ "x", "o" }, "ac", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+end, { desc = "class" })
+map({ "x", "o" }, "ic", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+end, { desc = "class" })
+-- You can also use captures from other query groups like `locals.scm`
+map({ "x", "o" }, "as", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
+end, { desc = "scope" })
+-- You can use the capture groups defined in `textobjects.scm`
+map({ "n", "x", "o" }, "]m", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+end, { desc = "function" })
+map({ "n", "x", "o" }, "]]", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+end, { desc = "class" })
+-- You can also pass a list to group multiple queries.
+map({ "n", "x", "o" }, "]o", function()
+  move.goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
+end, { desc = "loop" })
+-- You can also use captures from other query groups like `locals.scm` or `folds.scm`
+map({ "n", "x", "o" }, "]s", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
+end, { desc = "scope" })
+map({ "n", "x", "o" }, "]z", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
+end, { desc = "fold" })
+
+map({ "n", "x", "o" }, "]M", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+end, { desc = "function outer" })
+map({ "n", "x", "o" }, "][", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+end, { desc = "class outer" })
+
+map({ "n", "x", "o" }, "[m", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+end, { desc = "function outer" })
+map({ "n", "x", "o" }, "[[", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+end, { desc = "class outer" })
+
+map({ "n", "x", "o" }, "[M", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+end, { desc = "function outer" })
+map({ "n", "x", "o" }, "[]", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+end, { desc = "class outer" })
+
+-- Go to either the start or the end, whichever is closer.
+-- Use if you want more granular movements
+map({ "n", "x", "o" }, "]d", function()
+  require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
+end, { desc = "conditional" })
+map({ "n", "x", "o" }, "[d", function()
+  require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
+end, { desc = "conditional" })
